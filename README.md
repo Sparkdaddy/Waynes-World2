@@ -15,6 +15,8 @@ fronting fairly hard and wants to learn all of this shit.
 # ToDo
 1. figure out what to do
 2. implement what ever you figured out
+3. queries (well, location and transducers)
+
 
 # Middle fingers so far
 count = 6
