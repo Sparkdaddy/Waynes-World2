@@ -17,9 +17,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>Use me as a template</title>
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="form_upload.jsp"><i class="menu-button"></i> About</a></li>
-    <li><a href="index.jsp"><i class="menu-button"></i> INDEX</a></li>
-    <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Contact</a></li>
+    <li><a href="form_upload/form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
+    <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
+    <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
   </ul>
 </head>
 
