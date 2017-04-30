@@ -118,11 +118,12 @@
                 <tr>
                     <td><h4>Owner's name</h4></td>
                     <td><input name="owner_name" type="text" class="form-control" placeholder="owner_name"></td>
-                    <td>be sure to enter the wellID that it is connected to</td>
+                    <td>be sure to enter the wellID above that is owned</td>
                 </tr>
                 <tr>
                     <td><h4>Owner type</h4></td>
                     <td><input name="owner_type" type="text" class="form-control" placeholder="gov't., company, or person?"></td>
+                    <td>government, person, or company</td>
                 </tr>
                 <tr>
                     <td><h3>TRANSDUCER INFORMATION</h3></td>
@@ -130,7 +131,7 @@
                 <tr>
                     <td><h4>Transducer ID</h4></td>
                     <td><input name="transID" type="text" class="form-control" placeholder="1234abcd"></td>
-                    <td>be sure to enter the wellID that it is connected to</td>
+                    <td>be sure to enter the wellID above that it is connected to</td>
                 </tr>
                 <tr>
                     <td><h4>Transducer name</h4></td>

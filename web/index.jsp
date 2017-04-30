@@ -34,7 +34,7 @@
         <td>wellID</td>
         <td>aquafier</td>
         <td>state</td>
-        <td>country</td>
+        <td>county</td>
       </tr>
       <%
         try
@@ -63,7 +63,7 @@
         <td><%=rs.getInt("wellID")%></td>
         <td><%=rs.getString("aquafier_code")%></td>
         <td><%=rs.getString("state")%></td>
-        <td><%=rs.getString("country")%></td>
+        <td><%=rs.getString("county")%></td>
       </tr>
       <%
 

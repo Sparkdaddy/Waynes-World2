@@ -15,7 +15,7 @@
 </html>
 
 <%
-    Boolean success = true;
+    Boolean success = false;
     String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
     String USER = "ritSpaGee";
     String PASS = "geeterman";
@@ -41,7 +41,7 @@
         depth = Double.parseDouble(request.getParameter("depth"));
     double land_elevation = 0;
     if (request.getParameter("land_elevation") != "")
-        Double.parseDouble(request.getParameter("land_elevation"));
+        land_elevation = Double.parseDouble(request.getParameter("land_elevation"));
     double water_level_elevation = 0;
     if(request.getParameter("water_level_elevation") != "")
         water_level_elevation = Double.parseDouble(request.getParameter("water_level_elevation"));
@@ -76,9 +76,8 @@
 
 
     //double (and other primitive types) evaluate to zero if null.
-    if (wellID == 0 && owner_name == "" && transID == "") {
-        success = false;
-    } else {
+    if (wellID == 0 && owner_name == "" && transID == "") { }
+    else {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -97,22 +96,24 @@
             //Well input is present
             if (wellID != 0 && state != "") {
                 //check for valid data!
-                if( (usage == "irrigation" || usage == "unused" || usage == "domestic" || usage == "stock") && (diameter >= 0)
+                sql = "INSERT INTO ritSpaGee.Well (wellID, usagee, aquafier_code, comment, type_code, top_depth, " +
+                        "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
+                        "casingID, pump_description, state, county, latitude, longitude) VALUES (" + wellID + ',' +
+                        "\"" + usage + "\"" + ',' + "\"" + aquafier_code + "\"" + ',' + "\"" + comment + "\"" + ',' + "\"" + type_code.charAt(0) + "\"" +
+                        ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
+                        land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
+                        "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
+                if( (usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock") ) && (diameter >= 0)
                         && (depth != 0) && (aquafier_code != "") && (land_elevation >= bottom_elevation) && (state != "") &&
-                        (county != "") && (type_code != "") && (latitude != 0) && (longitude != 0) ) {
-                    sql = "INSERT INTO ritSpaGee.Well (wellID, usagee, aquafier_code, comment, type_code, top_depth, " +
-                            "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
-                            "casingID, pump_description, state, county, latitude, longitude) VALUES (" + wellID + ',' +
-                            "\"" + usage + "\"" + ',' + "\"" + aquafier_code + "\"" + ',' + "\"" + comment + "\"" + ',' + "\"" + type_code.charAt(0) + "\"" +
-                            ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
-                            land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
-                            "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
+                        (county != "") && (type_code != "") && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
+                        && (180 >= longitude) && type_code.length() == 1 ) {
+
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
+                    success = true;
                 }
                 else {
-                    System.out.println("Well upload has invalid data.");
-                    success = false;
+                    System.out.println("Well upload has invalid data. \n" + sql);
                     %>
                     <script language="Javascript">
                         window.alert("Well data not uploaded. Invalid data.");
@@ -123,14 +124,15 @@
 
             //Owner input present
             if (owner_name != "") {
-                if (owner_type != "") {
-                    sql = "INSERT INTO ritSpaGee.Owner (wellID, type, name) VALUES (" + wellID + ',' + "\"" + owner_type
-                            + "\"" + ',' + "\"" + owner_name + "\"" + ");";
+                sql = "INSERT INTO ritSpaGee.Owner (wellID, type, name) VALUES (" + wellID + ',' + "\"" + owner_type
+                        + "\"" + ',' + "\"" + owner_name + "\"" + ");";
+                if (owner_type.equals("company") || owner_type.equals("government") || owner_type.equals("person") ) {
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
+                    success = true;
                 }
                 else {
-                    success = false;
+                    System.out.println("Owner upload has invalid data. \n" + sql);
                     %>
                     <script language="Javascript">
                         window.alert("Owner data not uploaded. Invalid data.");
@@ -141,14 +143,15 @@
 
             //trans input present.
             if (transID != "") {
+                sql = "INSERT INTO ritSpaGee.Transducer (transID, wellID, type, name) VALUES (" + "\"" + transID
+                        + "\"" + ',' + wellID + ',' + "\"" + trans_type + "\"" + ',' + "\"" + trans_name + "\"" + ");";
                 if(trans_name != "" && trans_type != "") {
-                    sql = "INSERT INTO ritSpaGee.Transducer (transID, wellID, type, name) VALUES (" + "\"" + transID
-                            + "\"" + ',' + wellID + ',' + "\"" + trans_type + "\"" + ',' + "\"" + trans_name + "\"" + ");";
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
+                    success = true;
                 }
                 else {
-                    success = false;
+                    System.out.println("Transducer data not uploaded. Invalid data. \n" + sql);
                     %>
                     <script language="Javascript">
                         window.alert("Transducer data not uploaded. Invalid data.");
