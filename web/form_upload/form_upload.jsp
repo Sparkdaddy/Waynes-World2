@@ -36,19 +36,23 @@
         <div class="row">
             <table class="table table-hover">
                 <tr>
-                    <td><h4>wellID</h4></td>
+                    <td><h3>WELL INFORMATION</h3></td>
+                </tr>
+                <tr>
+                    <td><h4>wellID *</h4></td>
                     <td><input name="wellID" type="text" class="form-control" placeholder="id"></td>
                 </tr>
                 <tr>
-                    <td><h4>well usage</h4></td>
+                    <td><h4>well usage *</h4></td>
                     <td><input name="usage" type="text" class="form-control" placeholder="usage"></td>
+                    <td>irrigation, domestic, unused, or stock?</td>
                 </tr>
                 <tr>
-                    <td><h4>aquafier code</h4></td>
+                    <td><h4>aquafier code *</h4></td>
                     <td><input name="aquafier_code" type="text" class="form-control" placeholder="code"></td>
                 </tr>
                 <tr>
-                    <td><h4>type code</h4></td>
+                    <td><h4>type code *</h4></td>
                     <td><input name="type_code" type="text" class="form-control" placeholder="type code"></td>
                     <td>one character only in type code!</td>
                 </tr>
@@ -65,7 +69,7 @@
                     <td><input name="bottom_depth" type="text" class="form-control" placeholder="1,2,3"></td>
                 </tr>
                 <tr>
-                    <td><h4>depth (ft)</h4></td>
+                    <td><h4>depth * (ft)</h4></td>
                     <td><input name="depth" type="text" class="form-control" placeholder="5,5,5"></td>
                 </tr>
                 <tr>
@@ -73,11 +77,11 @@
                     <td><input name="water_level_elevation" type="text" class="form-control" placeholder="3,4,5"></td>
                 </tr>
                 <tr>
-                    <td><h4>land elevation (ft)</h4></td>
+                    <td><h4>land elevation * (ft)</h4></td>
                     <td><input name="land_elevation" type="text" class="form-control" placeholder="1,000"></td>
                 </tr>
                 <tr>
-                    <td><h4>bottom elevation (ft)</h4></td>
+                    <td><h4>bottom elevation * (ft)</h4></td>
                     <td><input name="bottom_elevation" type="text" class="form-control" placeholder="1,000"></td>
                 </tr>
                 <tr>
@@ -93,32 +97,35 @@
                     <td><input name="pump_description" type="text" class="form-control" placeholder="pump is like what?"></td>
                 </tr>
                 <tr>
-                    <td><h4>latitude</h4></td>
+                    <td><h4>latitude *</h4></td>
                     <td><input name="latitude" type="text" class="form-control" placeholder="54.45"></td>
                 </tr>
                 <tr>
-                    <td><h4>longitude</h4></td>
+                    <td><h4>longitude *</h4></td>
                     <td><input name="longitude" type="text" class="form-control" placeholder="45.54"></td>
                 </tr>
                 <tr>
-                    <td><h4>State</h4></td>
+                    <td><h4>State *</h4></td>
                     <td><input name="state" type="text" class="form-control" placeholder="TX, MN?"></td>
                 </tr>
                 <tr>
-                    <td><h4>Country</h4></td>
-                    <td><input name="country" type="text" class="form-control" placeholder="country"></td>
+                    <td><h4>County *</h4></td>
+                    <td><input name="county" type="text" class="form-control" placeholder="county"></td>
                 </tr>
                 <tr>
-                    <td><h4>OwnerID</h4></td>
-                    <td><input name="ownerID" type="text" class="form-control" placeholder="9.5"></td>
+                    <td><h3>OWNER INFORMATION</h3></td>
                 </tr>
                 <tr>
                     <td><h4>Owner's name</h4></td>
                     <td><input name="owner_name" type="text" class="form-control" placeholder="owner_name"></td>
+                    <td>be sure to enter the wellID that it is connected to</td>
                 </tr>
                 <tr>
                     <td><h4>Owner type</h4></td>
                     <td><input name="owner_type" type="text" class="form-control" placeholder="gov't., company, or person?"></td>
+                </tr>
+                <tr>
+                    <td><h3>TRANSDUCER INFORMATION</h3></td>
                 </tr>
                 <tr>
                     <td><h4>Transducer ID</h4></td>
@@ -135,16 +142,6 @@
                 </tr>
             </table>
         </div>
-        <input type="submit" name="button" value="Button" />
-        <button onclick=goto() type="button" class="btn btn-primary btn-lg btn-block">Upload</button>
-
-
-        <%--Function executing the post to the database.--%>
-        <script language="JavaScript">
-            function goto() {
-                window.location = "uploading.jsp";
-            }
-        </script>
-
+        <input type="submit" name="button" value="Upload the info"/>
     </form>
 </html>

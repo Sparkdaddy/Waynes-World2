@@ -21,11 +21,14 @@
     String PASS = "geeterman";
 
     String usage = request.getParameter("usage");
+    usage = usage.toLowerCase();
     double wellID = 0;
     if(request.getParameter("wellID") != "")
         wellID = Double.parseDouble(request.getParameter("wellID"));
     String aquafier_code = request.getParameter("aquafier_code");
     String type_code = request.getParameter("type_code");
+    if(type_code != "")
+        type_code = type_code.toUpperCase();
     String comment = request.getParameter("comment");
     double bottom_depth = 0;
     if(request.getParameter("bottom_depth") != "")
@@ -59,12 +62,13 @@
     if(request.getParameter("longitude") != "")
         longitude = Double.parseDouble(request.getParameter("longitude"));
     String state = request.getParameter("state");
-    String country = request.getParameter("country");
-    double ownerID = 0;
-    if (request.getParameter("ownerID") != "")
-        ownerID = Double.parseDouble(request.getParameter("ownerID"));
+    state = state.toLowerCase();
+    String county = request.getParameter("county");
+    county = county.toLowerCase();
     String owner_name = request.getParameter("owner_name");
+    owner_name = owner_name.toLowerCase();
     String owner_type = request.getParameter("owner_type");
+    owner_type = owner_type.toLowerCase();
     //Is transID a string??
     String transID = request.getParameter("transID");
     String trans_name = request.getParameter("trans_name");
@@ -72,7 +76,7 @@
 
 
     //double (and other primitive types) evaluate to zero if null.
-    if (wellID == 0 && ownerID == 0 && transID == "") {
+    if (wellID == 0 && owner_name == "" && transID == "") {
         success = false;
     } else {
         Connection conn = null;
@@ -90,47 +94,68 @@
             stmt = conn.createStatement();
 
             String sql = "";
-            //Owner input present
-            if (ownerID != 0) {
-                sql = "INSERT INTO ritSpaGee.Owner (ownerID, type, name) VALUES (" + ownerID + ',' + "\"" + owner_type
-                        + "\"" + ',' + "\"" + owner_name + "\"" + ");";
-                stmt.executeUpdate(sql);
-            }
-
-            PreparedStatement sql2;
             //Well input is present
             if (wellID != 0 && state != "") {
-                sql = "INSERT INTO ritSpaGee.Well (wellID, ownerID, usagee, aquafier_code, comment, type_code, top_depth, " +
-                        "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
-                        "casingID, pump_description, state, country, latitude, longitude) VALUES (" + wellID + ',' + "?" + ',' +
-                        "\"" + usage + "\"" + ',' + "\"" + aquafier_code + "\"" + ',' + "\"" + comment + "\"" + ',' + "\"" + type_code.charAt(0) + "\"" +
-                        ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
-                        land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
-                        "\"" + ',' + "\"" + country + "\"" + ',' + latitude + ',' + longitude + ");";
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                if(ownerID == 0)
-                    pstmt.setNull(1, Types.INTEGER);
-                else
-                    pstmt.setDouble(1, ownerID);
-                System.out.println(pstmt);
-                pstmt.executeUpdate();
-
-//                sql = "INSERT INTO ritSpaGee.Well (wellID, ownerID, usagee, aquafier_code, comment, type_code, top_depth, " +
-//                        "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
-//                        "casingID, pump_description, state, country, latitude, longitude) VALUES (" + wellID + ',' + ownerID + ',' +
-//                        "\"" + usage + "\"" + ',' + "\"" + aquafier_code + "\"" + ',' + "\"" + comment + "\"" + ',' + "\"" + type_code + "\"" +
-//                        ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
-//                        land_elevation + ',' + diameter + ',' + "\"" + casingID + "\"" + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
-//                        "\"" + ',' + "\"" + country + "\"" + ',' + latitude + ',' + longitude + ");";
-//                System.out.println(sql);
-//                stmt.executeUpdate(sql);
+                //check for valid data!
+                if( (usage == "irrigation" || usage == "unused" || usage == "domestic" || usage == "stock") && (diameter >= 0)
+                        && (depth != 0) && (aquafier_code != "") && (land_elevation >= bottom_elevation) && (state != "") &&
+                        (county != "") && (type_code != "") && (latitude != 0) && (longitude != 0) ) {
+                    sql = "INSERT INTO ritSpaGee.Well (wellID, usagee, aquafier_code, comment, type_code, top_depth, " +
+                            "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
+                            "casingID, pump_description, state, county, latitude, longitude) VALUES (" + wellID + ',' +
+                            "\"" + usage + "\"" + ',' + "\"" + aquafier_code + "\"" + ',' + "\"" + comment + "\"" + ',' + "\"" + type_code.charAt(0) + "\"" +
+                            ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
+                            land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
+                            "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
+                    System.out.println(sql);
+                    stmt.executeUpdate(sql);
+                }
+                else {
+                    System.out.println("Well upload has invalid data.");
+                    success = false;
+                    %>
+                    <script language="Javascript">
+                        window.alert("Well data not uploaded. Invalid data.");
+                    </script>
+                    <%
+                }
             }
+
+            //Owner input present
+            if (owner_name != "") {
+                if (owner_type != "") {
+                    sql = "INSERT INTO ritSpaGee.Owner (wellID, type, name) VALUES (" + wellID + ',' + "\"" + owner_type
+                            + "\"" + ',' + "\"" + owner_name + "\"" + ");";
+                    System.out.println(sql);
+                    stmt.executeUpdate(sql);
+                }
+                else {
+                    success = false;
+                    %>
+                    <script language="Javascript">
+                        window.alert("Owner data not uploaded. Invalid data.");
+                    </script>
+                    <%
+                }
+            }
+
             //trans input present.
             if (transID != "") {
-                sql = "INSERT INTO ritSpaGee.Transducer (transID, wellID, type, name) VALUES (" + "\"" + transID
-                        + "\"" + ',' + wellID + ',' + "\"" + trans_type + "\"" + ',' + "\"" + trans_name + "\"" + ");";
-                System.out.println(sql);
-                stmt.executeUpdate(sql);
+                if(trans_name != "" && trans_type != "") {
+                    sql = "INSERT INTO ritSpaGee.Transducer (transID, wellID, type, name) VALUES (" + "\"" + transID
+                            + "\"" + ',' + wellID + ',' + "\"" + trans_type + "\"" + ',' + "\"" + trans_name + "\"" + ");";
+                    System.out.println(sql);
+                    stmt.executeUpdate(sql);
+                }
+                else {
+                    success = false;
+                    %>
+                    <script language="Javascript">
+                        window.alert("Transducer data not uploaded. Invalid data.");
+                    </script>
+                    <%
+                }
+
             }
         } catch (SQLException se) {
             //Handle errors for JDBC
