@@ -27,38 +27,42 @@ public class UploadServlet extends HttpServlet {
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(fileContentIS))) {
              fileContent = buffer.lines().collect(Collectors.joining("\n"));
         }
+        String[] parts = fileContent.split("\\,|\\n");
 
         Boolean success = true;
         String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
         String USER = "ritSpaGee";
         String PASS = "geeterman";
+        double wellID;
 
         String fileType = request.getParameter("isFile");
         switch (fileType) {
 
             case "well":
-                String usage = "";
-                double wellID = 0;
-                String aquafier_code = "";
-                String type_code = "";
-                String comment = "";
-                double bottom_depth = 0;
-                double top_depth = 0;
-                double depth = 0;
-                double land_elevation = 0;
-                double water_level_elevation = 0;
-                double bottom_elevation = 0;
-                double diameter = 0;
-                double casingID = 0;
-                String pump_description = "";
-                double latitude = 0;
-                double longitude = 0;
-                String state = "";
-                String county = "";
+                String usage;
+                String aquafier_code;
+                String type_code;
+                String comment;
+                double bottom_depth;
+                double top_depth;
+                double depth;
+                double land_elevation;
+                double water_level_elevation;
+                double bottom_elevation;
+                double diameter;
+                double casingID;
+                String pump_description;
+                double latitude;
+                double longitude;
+                String state;
+                String county;
+                String owner_name;
+                String owner_type;
 
                 Map<Integer, String> fieldStringMap = new HashMap<>();
                 int end = -1;
-                for (int i = 1; i < 26; i++) {
+                //Mapping the column locations to the relevant variables.
+                for (int i = 1; i < 35; i++) {
                     String value, temp = "field" + i;
                     value = request.getParameter(temp);
 
@@ -95,24 +99,23 @@ public class UploadServlet extends HttpServlet {
                             fieldStringMap.put(i-1, "comment");
                         } else if (value.equals("diameter")) {
                             fieldStringMap.put(i-1, "diameter");
+                        } else if (value.equals("owner")) {
+                            fieldStringMap.put(i-1, "owner_name");
+                        } else if (value.equals("ownerType")) {
+                            fieldStringMap.put(i - 1, "owner_type");
                         } else if (value.equals("topDepth")) {
                             fieldStringMap.put(i-1, "top_depth");
                         } else if (value.equals("bottomDepth")) {
                             fieldStringMap.put(i-1, "bottom_depth");
+                        //End is used to tell us where the end of the columns are located
+                        } else if(value.equals("end")) {
+                            end = i - 1;
                         }
-
-                    } else if(end == -1) {
-                        end = i-1;
                     }
 
                 }
 
-                String[] parts = fileContent.split("\\,|\\n");
-//                for(int i = 0; i < 30; i++) {
-//                    System.out.print(parts[i]);
-//                    System.out.print(" ");
-//                }
-                System.out.println("Number of rows is " + (parts.length / (end -1) ));
+                //For loop iterates through each row.
                 for(int i = 0; i < (parts.length / (end -1)) && success; i++) {
                     //Setting variables back to default values.
                     usage = "";
@@ -120,20 +123,22 @@ public class UploadServlet extends HttpServlet {
                     aquafier_code = "";
                     type_code = "";
                     comment = "";
-                    bottom_depth = 0;
-                    top_depth = 0;
-                    depth = 0;
-                    land_elevation = 0;
-                    water_level_elevation = 0;
-                    bottom_elevation = 0;
-                    diameter = 0;
-                    casingID = 0;
+                    bottom_depth = -1;
+                    top_depth = -1;
+                    depth = -1;
+                    land_elevation = -1;
+                    water_level_elevation = -1;
+                    bottom_elevation = -1;
+                    diameter = -1;
+                    casingID = -1;
                     pump_description = "";
-                    latitude = 0;
-                    longitude = 0;
+                    latitude = -1;
+                    longitude = -1;
                     state = "";
                     county = "";
-                    //Matching data to well variables and then using insertion statement to put it in the db.
+                    owner_name = "";
+                    owner_type = "";
+                    //Matching data to well variables from the columns.
                     for (int j = 0; j < end; j++) {
                         if(fieldStringMap.containsKey(j)) {
                             switch (fieldStringMap.get(j)) {
@@ -196,28 +201,42 @@ public class UploadServlet extends HttpServlet {
                                 case "diameter":
                                     if(!parts[(i * end) + j].isEmpty())
                                         diameter = Double.parseDouble(parts[(i * end) + j]);
+                                    break;
                                 case "top_depth":
                                     if(!parts[(i * end) + j].isEmpty())
                                         top_depth = Double.parseDouble(parts[(i * end) + j]);
+                                    break;
                                 case "bottom_depth":
                                     if(!parts[(i * end) + j].isEmpty())
                                         bottom_depth = Double.parseDouble(parts[(i * end) + j]);
+                                    break;
                                 case "bottom_elevation":
                                     if(!parts[(i * end) + j].isEmpty())
                                         bottom_elevation = Double.parseDouble(parts[(i * end) + j]);
+                                    break;
+                                case "owner_name":
+                                    owner_name = parts[(i * end) + j];
+                                    owner_name = owner_name.replace("\"", "");
+                                    break;
+                                case "owner_type":
+                                    owner_type = parts[(i * end) + j];
+                                    owner_type = owner_type.replace("\"", "");
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
 
-                    //string modifications to help them be used for database queries.
+                    //string modifications to help data be consistent for database queries.
                     usage = usage.toLowerCase();
                     state = state.toLowerCase();
                     county = county.toLowerCase();
                     type_code = type_code.toUpperCase();
-                    //double (and other primitive types) evaluate to zero if null.
-                    if (wellID == 0) {
+                    owner_name = owner_name.toLowerCase();
+                    owner_type = owner_type.toLowerCase();
+                    //actual sql insertion statement below
+                    if (wellID == -1) {
                     } else {
                         Connection conn = null;
                         Statement stmt = null;
@@ -235,7 +254,7 @@ public class UploadServlet extends HttpServlet {
 
                             String sql = "";
                             //Well input is present
-                            if (wellID != 0 && state != "" && type_code.length() == 1) {
+                            if (wellID != -1 && state != "" && type_code.length() == 1) {
                                 //check for valid data!
                                 sql = "INSERT INTO ritSpaGee.Well (wellID, usagee, aquafier_code, comment, type_code, top_depth, " +
                                         "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
@@ -244,8 +263,8 @@ public class UploadServlet extends HttpServlet {
                                         ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
                                         land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
                                         "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
-                                if ((usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock")) && (diameter >= 0)
-                                        && (depth != 0) && (aquafier_code != "") && (land_elevation >= bottom_elevation) && (state != "") &&
+                                if ((usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock")) && ( (diameter >= 0) || (diameter == -1) )
+                                        && (depth != -1) && (aquafier_code != "") && (land_elevation >= bottom_elevation) && (state != "") &&
                                         (county != "") && (type_code != "") && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
                                         && (180 >= longitude)) {
 
@@ -254,6 +273,20 @@ public class UploadServlet extends HttpServlet {
                                     success = true;
                                 } else {
                                     System.out.println("Well upload has invalid data. \n" + sql);
+                                    success = false;
+                                }
+                            }
+                            //Owner input present
+                            if (owner_name != "" && success) {
+                                sql = "INSERT INTO ritSpaGee.Owner (wellID, type, name) VALUES (" + wellID + ',' + "\"" + owner_type
+                                        + "\"" + ',' + "\"" + owner_name + "\"" + ");";
+                                if (owner_type.equals("company") || owner_type.equals("government") || owner_type.equals("person") ) {
+                                    System.out.println(sql);
+                                    stmt.executeUpdate(sql);
+                                    success = true;
+                                }
+                                else {
+                                    System.out.println("Owner upload has invalid data. \n" + sql);
                                 }
                             }
 
@@ -283,7 +316,9 @@ public class UploadServlet extends HttpServlet {
                     }
                 }
 
-                if (success) {
+                if (success && end != -1) {
+
+                } else if (end == -1) {
 
                 } else {
 
@@ -292,12 +327,129 @@ public class UploadServlet extends HttpServlet {
 
 
             case "sensor":
+                String hourTime;
+                String transID = request.getParameter("sensor");
+                String dateTime;
+                double temperature;
+                double conductivity;
+                double pressure;
+                double salinity;
+                double TDS;
 
+                //Assuming that all sensor reading files have eight columns.
+                //This for loop will iterate through each row
+                for(int i = 0; i < (parts.length / 8) && success; i++) {
+                    dateTime = "";
+                    hourTime = "";
+                    temperature = 99999;
+                    conductivity = 99999;
+                    pressure = 99999;
+                    salinity = 99999;
+                    TDS = 99999;
+                    for(int j = 1; j < 8; j++) {
+                        switch (j) {
+                            case 1:
+                                dateTime = parts[(i * 8) + j];
+                                break;
+                            case 2:
+                                hourTime = parts[(i * 8) + j];
+                                dateTime = dateTime.substring(4) + "/0" + dateTime.substring(0,2) +"0" +dateTime.substring(2,3) + " " + hourTime;
+                                break;
+                                //2016/5/2 14:00:00
+                            case 3:
+                                if(!parts[(i*8) + j].isEmpty())
+                                    temperature = Double.parseDouble(parts[(i*8) + j]);
+                                break;
+                            case 4:
+                                if(!parts[(i*8) + j].isEmpty())
+                                    conductivity = Double.parseDouble(parts[(i*8) + j]);
+                                break;
+                            case 5:
+                                if(!parts[(i*8) + j].isEmpty())
+                                    pressure = Double.parseDouble(parts[(i*8) + j]);
+                                break;
+                            case 6:
+                                if(!parts[(i*8) + j].isEmpty())
+                                    salinity = Double.parseDouble(parts[(i*8) + j]);
+                                break;
+                            case 7:
+                                if(!parts[(i*8) + j].isEmpty())
+                                    TDS = Double.parseDouble(parts[(i*8) + j]);
+                                break;
+                            default:
+                                //Wrong format?
+                                break;
+                        }
+                    }
+                    Connection conn = null;
+                    Statement stmt = null;
+                    try {
+                        //STEP 2: Register JDBC driver
+                        Class.forName("com.mysql.jdbc.Driver");
 
+                        //STEP 3: Open a connection
+                        System.out.println("Connecting to database...");
+                        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                        //STEP 4: Execute a query
+                        System.out.println("Creating statement...");
+                        stmt = conn.createStatement();
+
+                        String sql = "";
+                        if (transID != "") {
+                            //check for valid data!
+                            sql = "INSERT INTO ritSpaGee.Water (transID, timedate, salinity, temperature, conductivity," +
+                                    "pressure, TDS) VALUES (" + "\"" + transID + "\"" + ',' + "\"" + dateTime + "\"" +
+                                    ',' + salinity + ',' + temperature + ',' + conductivity + ',' + pressure + ',' +
+                                    TDS + ");";
+                            if (dateTime != "" && temperature != 99999 && conductivity != 99999 && pressure != 99999
+                                    && salinity != 99999 && TDS != 99999) {
+
+                                System.out.println(sql);
+                                stmt.executeUpdate(sql);
+                                success = true;
+                            } else {
+                                System.out.println("Sensor data has invalid data. \n" + sql);
+                                success = false;
+                            }
+                        }
+
+                    } catch (SQLException se) {
+                        //Handle errors for JDBC
+                        se.printStackTrace();
+                        success = false;
+                    } catch (Exception e) {
+                        //Handle errors for Class.forName
+                        e.printStackTrace();
+                        success = false;
+                    } finally {
+                        //finally block used to close resources
+                        try {
+                            if (stmt != null)
+                                stmt.close();
+                        } catch (SQLException se2) {
+                        }// nothing we can do
+                        try {
+                            if (conn != null)
+                                conn.close();
+                        } catch (SQLException se) {
+                            success = false;
+                            se.printStackTrace();
+                        }//end finally try
+                    }//end try
+                }
+
+                if (success) {
+
+                } else {
+
+                }
                 break;
 
             default:
                 break;
         }
+
+        //Insert something to return user to page
     }
 }

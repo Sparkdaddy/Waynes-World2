@@ -22,7 +22,10 @@
 <div class="container">
     <div class="row">
         <h3 class="text-center"> Select a file </h3>
-        <p>Note: Do not have commas in upload files, e.g. a comma in the comments/remarks section.</p>
+        <p>Note: Do not have commas in upload files, e.g. a comma in the comments/remarks section.
+            <br>Additionally, if an owner field is present, an owner type will also be needed.
+            <br>Will need to set the end only once.
+        </p>
     </div>
     <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>
     <form action="/file_upload" method="post" enctype="multipart/form-data">
@@ -69,14 +72,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 2</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field2">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -95,14 +101,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 3</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field3">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -121,14 +130,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 4</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field4">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -147,14 +159,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 5</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field5">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -173,14 +188,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 6</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field6">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -199,14 +217,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 7</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field7">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -225,14 +246,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 8</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field8">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -251,14 +275,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 9</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field9">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -277,14 +304,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 10</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field10">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -303,14 +333,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 11</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field11">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -329,14 +362,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 12</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field12">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -355,14 +391,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 13</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field13">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -381,14 +420,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 14</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field14">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -407,14 +449,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 15</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field15">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -433,14 +478,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 16</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field16">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -459,14 +507,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 17</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field17">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -485,14 +536,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 18</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field18">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -511,14 +565,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 19</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field19">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -537,14 +594,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 20</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field20">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -563,14 +623,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 21</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field21">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -589,14 +652,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 22</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field22">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -615,14 +681,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 23</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field23">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -641,14 +710,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 24</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field24">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -667,14 +739,17 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><h4>column 25</h4></td>
                     <td>
-                        <select name="field1">
+                        <select name="field25">
                             <option value="wellID">wellID</option>
                             <option value="Latitude">Latitude</option>
                             <option value="Longitude">Longitude</option>
@@ -693,7 +768,300 @@
                             <option value="pump">pump</option>
                             <option value="WellUse">WellUse</option>
                             <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
                             <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 26</h4></td>
+                    <td>
+                        <select name="field26">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 27</h4></td>
+                    <td>
+                        <select name="field27">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 28</h4></td>
+                    <td>
+                        <select name="field28">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 29</h4></td>
+                    <td>
+                        <select name="field29">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 30</h4></td>
+                    <td>
+                        <select name="field30">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 31</h4></td>
+                    <td>
+                        <select name="field31">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 32</h4></td>
+                    <td>
+                        <select name="field32">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 33</h4></td>
+                    <td>
+                        <select name="field33">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 34</h4></td>
+                    <td>
+                        <select name="field34">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>column 35</h4></td>
+                    <td>
+                        <select name="field35">
+                            <option value="wellID">wellID</option>
+                            <option value="Latitude">Latitude</option>
+                            <option value="Longitude">Longitude</option>
+                            <option value="county">county</option>
+                            <option value="state">state</option>
+                            <option value="Aquifercode">Aquifercode</option>
+                            <option value="wellTypeCode">wellTypeCode</option>
+                            <option value="wellDepth">wellDepth</option>
+                            <option value="casingID">casingID</option>
+                            <option value="diameter">diameter</option>
+                            <option value="topDepth">topDepth</option>
+                            <option value="bottomDepth">bottomDepth</option>
+                            <option value="bottomElevation">bottom elevation</option>
+                            <option value="landSurfaceElevation">landsurfaceElevation</option>
+                            <option value="WaterElevation">WaterElevation</option>
+                            <option value="pump">pump</option>
+                            <option value="WellUse">WellUse</option>
+                            <option value="comments">comments</option>
+                            <option value="owner">owner</option>
+                            <option value="ownerType">owner type</option>
+                            <option value="other" selected>other</option>
+                            <option value="end">End</option>
                         </select>
                     </td>
                 </tr>
