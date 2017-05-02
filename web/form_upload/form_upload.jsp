@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Upload your forms here</title>
     <ul class="nav navbar-nav navbar-right">
+        <li><a href="../file_upload/file_upload.jsp"> file upload</a> </li>
         <li><a href="form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
         <li><a href="../sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
