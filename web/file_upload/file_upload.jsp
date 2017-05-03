@@ -13,9 +13,9 @@
     <title>Upload your file here</title>
     <ul class="inlineList">
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="file_upload.jsp"> File upload</a> </li>
+        <li><a href="file_upload.jsp"> File upload</a><i class="menu-button"></i> </li>
         <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
-        <li><a href="../sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>
+        <li><a href="../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
     </ul>
     <hr class = row/>
 </head>
