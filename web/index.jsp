@@ -17,11 +17,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>Use me as a template</title>
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="/file_upload/file_upload.jsp"> file upload</a> </li>
-    <li><a href="/form_upload/form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
     <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
-    <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
+    <li><a href="${pageContext.request.contextPath}/file_upload/file_upload.jsp"> File upload</a> </li>
+    <li><a href="${pageContext.request.contextPath}/form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
+    <li><a href="${pageContext.request.contextPath}/queries/sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>
   </ul>
+  <hr class="row" />
 </head>
 
 <div class="container">
@@ -79,11 +80,11 @@
       catch(Exception e)
       {
         e.printStackTrace();
-        out.println("<h1> error: "+ e.getMessage()+"</h1>");
+        System.out.println("<h1> error: "+ e.getMessage()+"</h1>");
       }
 
     %>
 
   </form>
-  </html>
 </div>
+</html>

@@ -15,18 +15,20 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Use me as a template</title>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="/file_upload/file_upload.jsp"> file upload</a> </li>
-        <li><a href="form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
-        <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
-    </ul>
-</head>
+    <title>This is my template now</title>
 
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
+        <li><a href="../file_upload/file_upload.jsp"><i class="menu-button"></i> File upload</a> </li>
+        <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
+        <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>
+    </ul>
+    <hr class="row" />
+</head>
+<br/>
 <div class="container">
     <div class="row">
-        <h3 class="text-center"> First display table </h3>
+        <h3 class="text-center"> Well Table</h3>
     </div>
     <form method="post">
 
@@ -35,7 +37,7 @@
                 <td>wellID</td>
                 <td>aquafier</td>
                 <td>state</td>
-                <td>country</td>
+                <td>county</td>
             </tr>
             <%
                 try
@@ -54,7 +56,7 @@
                     System.out.println("Creating statement...");
                     stmt = conn.createStatement();
                     String sql;
-                    sql = "SELECT * FROM ritSpaGee.Well";
+                    sql = "SELECT * from ritSpaGee.Well";
                     ResultSet rs = stmt.executeQuery(sql);
 
                     while(rs.next())
@@ -64,7 +66,7 @@
                 <td><%=rs.getInt("wellID")%></td>
                 <td><%=rs.getString("aquafier_code")%></td>
                 <td><%=rs.getString("state")%></td>
-                <td><%=rs.getString("country")%></td>
+                <td><%=rs.getString("county")%></td>
             </tr>
             <%
 
@@ -81,9 +83,8 @@
                 e.printStackTrace();
                 out.println("<h1> error: "+ e.getMessage()+"</h1>");
             }
-
         %>
 
     </form>
-</html>
 </div>
+</html>
