@@ -10,14 +10,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Upload your forms here</title>
-    <ul class="nav navbar-nav navbar-right">
+    <title>Upload your file here</title>
+    <ul class="inlineList">
+        <li><a href="file_upload.jsp"> file upload</a> </li>
+        <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="file_upload.jsp"> File upload</a> </li>
-        <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
-        <li><a href="../queries/sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>
+        <li><a href="../sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
     </ul>
-    <hr class="row" />
+    <br/>
 </head>
 
 <div class="container">
@@ -25,7 +25,8 @@
         <h3 class="text-center"> Select a file </h3>
         <p>Note: Do not have commas in upload files, e.g. a comma in the comments/remarks section.
             <br>Additionally, if an owner field is present, an owner type will also be needed.
-            <br>Will need to set the end only once.
+            <br>Will need to set the end column only once.
+            <br>Lastly, make sure the excel sheet begins with the data; no header statements before.
         </p>
     </div>
     <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>
