@@ -5,14 +5,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.sql.*;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +17,6 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
         Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         InputStream fileContentIS = filePart.getInputStream();
 
         String fileContent;
@@ -36,6 +30,27 @@ public class UploadServlet extends HttpServlet {
         String USER = "ritSpaGee";
         String PASS = "geeterman";
         double wellID;
+        //Messages to be displayed when upload is completed.
+        PrintWriter out = response.getWriter();
+        String noEndOnForm = "<html> <p> End was not entered as an option in the field list. </p>\n";
+        String successfulUpload = "<html> <p> Data Uploaded successfully! </p>\n";
+        String failedUpload = "<html> <p> Data was not uploaded correctly. Check for commas in the upload form. </p>\n";
+        String html = "<head>\n" +
+                "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" +
+                "    <title>File finished</title>\n" +
+                "    <ul class=\"inlineList\">\n" +
+                "        <li><a href=\"file_upload/file_upload.jsp\"> file upload</a> </li>\n" +
+                "        <li><a href=\"../form_upload/form_upload.jsp\"><i class=\"menu-button\"></i> form upload</a></li>\n" +
+                "        <li><a href=\"../index.jsp\"><i class=\"menu-button\"></i> Home</a></li>\n" +
+                "        <li><a href=\"../sql_search.jsp\"><i class=\"fa fa-comment\"></i> Query your mom</a></li>\n" +
+                "    </ul>\n" +
+                "    <br/>\n" +
+                "</head>" +
+                "</html>";
+        noEndOnForm += html;
+        successfulUpload += html;
+        failedUpload += html;
+
         Connection conn;
         Statement stmt;
 
@@ -292,13 +307,8 @@ public class UploadServlet extends HttpServlet {
                                     System.out.println("Owner upload has invalid data. \n" + sql);
                                 }
                             }
-                            //every 8 rows, the db will be updated.
-                            if(i != 0 && i % 8 == 0) {
-                                stmt.executeBatch();
-                            }
                         }
                     }
-                    //TODO bad if it is empty?
                     stmt.executeBatch();
                 } catch (SQLException se) {
                     //Handle errors for JDBC
@@ -325,11 +335,11 @@ public class UploadServlet extends HttpServlet {
                 }//end try
 
                 if (success && end != -1) {
-
+                    out.println(successfulUpload);
                 } else if (end == -1) {
-
+                    out.println(noEndOnForm);
                 } else {
-
+                    out.println(failedUpload);
                 }
                 break;
 
@@ -430,10 +440,6 @@ public class UploadServlet extends HttpServlet {
                                 success = false;
                             }
                         }
-                        //every 30 rows, the db will be updated.
-                        if(i != 0 && i % 30 == 0) {
-                            stmt.executeBatch();
-                        }
                     }
                     stmt.executeBatch();
                 } catch (SQLException se) {
@@ -461,16 +467,14 @@ public class UploadServlet extends HttpServlet {
                 }//end try
 
                 if (success) {
-
+                    out.println(successfulUpload);
                 } else {
-
+                    out.println(failedUpload);
                 }
                 break;
 
             default:
                 break;
         }
-
-        //Insert something to return user to page
     }
 }

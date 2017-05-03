@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Upload your forms here</title>
+    <title>Upload your file here</title>
     <ul class="inlineList">
         <li><a href="file_upload.jsp"> file upload</a> </li>
         <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
@@ -26,6 +26,7 @@
         <p>Note: Do not have commas in upload files, e.g. a comma in the comments/remarks section.
             <br>Additionally, if an owner field is present, an owner type will also be needed.
             <br>Will need to set the end column only once.
+            <br>Lastly, make sure the excel sheet begins with the data; no header statements before.
         </p>
     </div>
     <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>

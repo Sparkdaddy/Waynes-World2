@@ -103,10 +103,10 @@
                         ',' + top_depth + ',' + bottom_depth + ',' + depth + ',' + bottom_elevation + ',' + water_level_elevation + ',' +
                         land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
                         "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
-                if( (usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock") ) && (diameter >= 0)
-                        && (depth != 0) && (aquafier_code != "") && (land_elevation >= bottom_elevation) && (state != "") &&
-                        (county != "") && (type_code != "") && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
-                        && (180 >= longitude) && type_code.length() == 1 ) {
+                if( ((usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock")) && ((diameter >= 0) || (diameter == -1))
+                        && (depth != -1) && (!aquafier_code.equals("")) && (land_elevation >= bottom_elevation) && (!state.equals("")) &&
+                        (!county.equals("")) && (!type_code.equals("")) && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
+                        && (180 >= longitude) && type_code.length() == 1) {
 
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
