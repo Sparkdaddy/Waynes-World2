@@ -23,7 +23,7 @@ public class UploadServlet extends HttpServlet {
         try (BufferedReader buffer = new BufferedReader(new InputStreamReader(fileContentIS))) {
              fileContent = buffer.lines().collect(Collectors.joining("\n"));
         }
-        String[] parts = fileContent.split("\\,|\\n");
+        String[] parts = fileContent.split("\\,|\\n|\\t");
 
         Boolean success = true;
         String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
@@ -32,27 +32,16 @@ public class UploadServlet extends HttpServlet {
         double wellID;
         //Messages to be displayed when upload is completed.
         PrintWriter out = response.getWriter();
-        String noEndOnForm = "<html> <p> End was not entered as an option in the field list. </p>\n";
-        String successfulUpload = "<html> <p> Data Uploaded successfully! </p>\n";
-        String failedUpload = "<html> <p> Data was not uploaded correctly. Check for commas in the upload form. </p>\n";
-        String html = "<head>\n" +
-                "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" +
-                "    <title>File finished</title>\n" +
-                "    <ul class=\"inlineList\">\n" +
-                "        <li><a href=\"file_upload/file_upload.jsp\"> file upload</a> </li>\n" +
-                "        <li><a href=\"../form_upload/form_upload.jsp\"><i class=\"menu-button\"></i> form upload</a></li>\n" +
-                "        <li><a href=\"../index.jsp\"><i class=\"menu-button\"></i> Home</a></li>\n" +
-                "        <li><a href=\"../sql_search.jsp\"><i class=\"fa fa-comment\"></i> Query your mom</a></li>\n" +
-                "    </ul>\n" +
-                "    <br/>\n" +
-                "</head>" +
-                "</html>";
-        noEndOnForm += html;
-        successfulUpload += html;
-        failedUpload += html;
+        String noEndOnForm = "<script language=\"Javascript\"> window.alert(\"The end column was not set. Please try again\"); \n" +
+                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+        String successfulUpload = "<script language=\"Javascript\"> window.alert(\"Data insertion successful!\"); \n" +
+                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+        String failedUpload = "<script language=\"Javascript\"> window.alert(\"Data was not uploaded correctly. Check for commas in the upload form.\");\n " +
+                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
 
         Connection conn;
         Statement stmt;
+        String temp;
 
         String fileType = request.getParameter("isFile");
         switch (fileType) {
@@ -82,7 +71,8 @@ public class UploadServlet extends HttpServlet {
                 int end = -1;
                 //Mapping the column locations to the relevant variables.
                 for (int i = 1; i < 35; i++) {
-                    String value, temp = "field" + i;
+                    String value;
+                    temp = "field" + i;
                     value = request.getParameter(temp);
 
                     if (!value.isEmpty()) {
@@ -174,86 +164,82 @@ public class UploadServlet extends HttpServlet {
                         //Matching data to well variables from the columns.
                         for (int j = 0; j < end; j++) {
                             if(fieldStringMap.containsKey(j)) {
+                                temp = parts[(i* end) + j];
+                                temp = temp.replace("\"","");   //Random quotation marks appearing.
+                                temp = temp.replace(" ", "");
                                 switch (fieldStringMap.get(j)) {
                                     case "wellID":
-                                        if(!parts[(i*end) +j].isEmpty())
-                                            wellID = Double.parseDouble(parts[(i * end) + j]);
+                                        if(!parts[(i*end) +j].isEmpty()) {
+                                            System.out.println(temp);
+                                            wellID = Double.parseDouble(temp);
+                                        }
                                         break;
                                     case "latitude":
                                         if(!parts[(i*end) +j].isEmpty())
-                                            latitude = Double.parseDouble(parts[(i * end) + j]);
+                                            latitude = Double.parseDouble(temp);
                                         break;
                                     case "longitude":
                                         if(!parts[(i*end) +j].isEmpty())
-                                            longitude = Double.parseDouble(parts[(i * end) + j]);
+                                            longitude = Double.parseDouble(temp);
                                         break;
                                     case "county":
-                                        county = parts[(i * end) + j];
-                                        county = county.replace("\"", "");
+                                        county = temp;
                                         break;
                                     case "aquafier_code":
-                                        aquafier_code = parts[(i * end) + j];
-                                        aquafier_code = aquafier_code.replace("\"", "");
+                                        aquafier_code = temp;
                                         break;
                                     case "state":
-                                        state = parts[(i * end) + j];
-                                        state = state.replace("\"", "");
+                                        state = temp;
                                         break;
                                     case "type_code":
-                                        type_code = parts[(i * end) + j];
-                                        type_code = type_code.replace("\"","");
+                                        type_code = temp;
                                         break;
                                     case "depth":
                                         if(!parts[(i*end) +j].isEmpty())
-                                            depth = Double.parseDouble(parts[(i * end) + j]);
+                                            depth = Double.parseDouble(temp);
                                         break;
                                     case "casingID":
                                         if(!parts[(i*end) +j].isEmpty())
-                                            casingID = Double.parseDouble(parts[(i * end) + j]);
+                                            casingID = Double.parseDouble(temp);
                                         break;
                                     case "land_elevation":
                                         if(!parts[(i*j) +j].isEmpty())
-                                            land_elevation = Double.parseDouble(parts[(i * end) + j]);
+                                            land_elevation = Double.parseDouble(temp);
                                         break;
                                     case "water_level_elevation":
                                         if(!parts[(i*j) +j].isEmpty())
-                                            water_level_elevation = Double.parseDouble(parts[(i * end) + j]);
+                                            water_level_elevation = Double.parseDouble(temp);
                                         break;
                                     case "usage":
-                                        usage = parts[(i * end) + j];
-                                        usage = usage.replace("\"","");
+                                        usage = temp;
                                         break;
                                     case "pump_description":
-                                        pump_description = parts[(i * end) + j];
-                                        pump_description = pump_description.replace("\"", "");
+                                        pump_description = temp;
                                         break;
                                     case "comment":
-                                        comment = parts[(i * end) + j];
-                                        comment = comment.replace("\"","");
+                                        comment = temp;
                                         break;
                                     case "diameter":
-                                        if(!parts[(i * end) + j].isEmpty())
-                                            diameter = Double.parseDouble(parts[(i * end) + j]);
+                                        if(!parts[(i*j) +j].isEmpty())
+                                            diameter = Double.parseDouble(temp);
                                         break;
                                     case "top_depth":
-                                        if(!parts[(i * end) + j].isEmpty())
-                                            top_depth = Double.parseDouble(parts[(i * end) + j]);
+                                        if(!parts[(i*j) +j].isEmpty())
+                                            top_depth = Double.parseDouble(temp);
                                         break;
                                     case "bottom_depth":
-                                        if(!parts[(i * end) + j].isEmpty())
-                                            bottom_depth = Double.parseDouble(parts[(i * end) + j]);
+                                        if(!parts[(i*j) +j].isEmpty())
+                                            bottom_depth = Double.parseDouble(temp);
                                         break;
                                     case "bottom_elevation":
-                                        if(!parts[(i * end) + j].isEmpty())
-                                            bottom_elevation = Double.parseDouble(parts[(i * end) + j]);
+                                        if(!parts[(i*j) +j].isEmpty())
+                                            bottom_elevation = Double.parseDouble(temp);
                                         break;
                                     case "owner_name":
-                                        owner_name = parts[(i * end) + j];
-                                        owner_name = owner_name.replace("\"", "");
+                                        owner_name = temp;
                                         break;
                                     case "owner_type":
-                                        owner_type = parts[(i * end) + j];
-                                        owner_type = owner_type.replace("\"", "");
+                                        owner_type = temp;
                                         break;
                                     default:
                                         break;
@@ -289,7 +275,6 @@ public class UploadServlet extends HttpServlet {
 
                                     System.out.println(sql);
                                     stmt.addBatch(sql);
-                                    success = true;
                                 } else {
                                     System.out.println("Well upload has invalid data. \n" + sql);
                                     success = false;
@@ -302,9 +287,9 @@ public class UploadServlet extends HttpServlet {
                                 if (owner_type.equals("company") || owner_type.equals("government") || owner_type.equals("person")) {
                                     System.out.println(sql);
                                     stmt.addBatch(sql);
-                                    success = true;
                                 } else {
                                     System.out.println("Owner upload has invalid data. \n" + sql);
+                                    success = false;
                                 }
                             }
                         }
@@ -434,7 +419,6 @@ public class UploadServlet extends HttpServlet {
 
                                 System.out.println(sql);
                                 stmt.addBatch(sql);
-                                success = true;
                             } else {
                                 System.out.println("Sensor data has invalid data. \n" + sql);
                                 success = false;
