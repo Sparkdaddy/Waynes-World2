@@ -16,13 +16,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Upload your forms here</title>
-    <ul class="inlineList">
-        <li><a href="../file_upload/file_upload.jsp"> file upload</a> </li>
-        <li><a href="form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
-        <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="../sql_search.jsp"><i class="fa fa-comment"></i> Query your mom</a></li>
-    </ul>
-    <br/>
+    <%--<ul class="inlineList">--%>
+        <%--<li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>--%>
+        <%--<li><a href="../file_upload/file_upload.jsp"> File upload</a> </li>--%>
+        <%--<li><a href="form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>--%>
+        <%--<li><a href="../sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>--%>
+    <%--</ul>--%>
+    <hr class="row" />
 </head>
 
 <div class="container">
@@ -31,9 +31,6 @@
     </div>
     <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>
     <form action="uploading.jsp" method="post">
-
-
-        <hr class="row" />
         <div class="row">
             <table class="table table-hover">
                 <tr>
