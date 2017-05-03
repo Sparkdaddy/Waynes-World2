@@ -16,7 +16,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>Use me as a template</title>
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="inlineList">
     <li><a href="/file_upload/file_upload.jsp"> file upload</a> </li>
     <li><a href="/form_upload/form_upload.jsp"><i class="menu-button"></i> form upload</a></li>
     <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
