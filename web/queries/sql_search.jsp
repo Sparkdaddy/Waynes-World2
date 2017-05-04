@@ -27,11 +27,13 @@
 </head>
 <br/>
 <body>
-    <h2>Select the table to search through</h2>
+    <h2>Select the search you would like to do</h2>
     well:
     <input id="wellchk" type="radio" name="tables" value="wellDiv" onclick="showDivOnclick()" ondblclick="uncheck('wellchk')">
     transducer:
     <input id="transchk" type="radio" name="tables" value="transDiv" onclick="showDivOnclick()" ondblclick="uncheck('transchk')">
+    transducer advanced analysis:
+    <input id="analysis" type="radio" name="tables" value="anDiv" onclick="showDivOnclick()" ondblclick="uncheck('analysis')">
     location:
     <input id="locchk" type="radio" name="tables" value="locDiv" onclick="showDivOnclick()" ondblclick="uncheck('locchk')">
     <br/>
@@ -130,10 +132,24 @@
         <div id="transDiv" style="display: none">
             this is the transducer bit
         </div>
+        <div id="anDiv" style="display: none">
+            Transducer ID:
+            <input type="text" name="transId">
+            <input type="submit" name="submit" value="Submit" onclick="showTransSubmitDiv()">
+
+        </div>
         <div id="locDiv" style="display: none">
             this the location bit
         </div>
+        <div id="Submit" style="display: none">
+            This is a test lol.
+            <script language="JavaScript">
+                var id = document.getElementByName('transId').value;
+            </script>
+        </div>
     </div>
+
+
 
     <div class="container">
 
@@ -153,6 +169,11 @@
                     x.style.display = 'none';
                 }
             }
+        }
+
+        function showTransSubmitDiv(){
+            var name = document.getElementById('Submit');
+            name.style.display = 'block';
         }
 
         function uncheck(val) {
