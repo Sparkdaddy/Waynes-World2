@@ -15,18 +15,27 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="../overall.css">
+    <link rel="stylesheet" type="text/css" href="../../overall.css">
     <title>Upload your forms here</title>
     <ul class="inlineList">
-        <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="../file_upload/file_upload.jsp"><i class="menu-button"></i> File upload</a> </li>
-        <li><a href="form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
-        <li><a href="../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>
+        <li><a href="../../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="../upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class="row" />
 </head>
 
-<div class="container">
+<h2>Select the table to search through</h2>
+well upload:
+<input type="radio" name="table" value="formDiv" onclick="gotoFormUpload()">
+<br> file upload:
+<input type="radio" name="table" value="transDiv" onclick="gotoFileUpload()">
+<br>rainfall upload:
+<input type="radio" name="table" value="locDiv" onclick="gotoRainfallUpload()">
+<br/>
+
+<body>
+<div class="container" id="formDiv">
     <div class="row">
         <h3 class="text-center"> Insert all the data </h3>
     </div>
@@ -144,4 +153,19 @@
         </div>
         <input type="submit" name="button" value="Upload the info"/>
     </form>
+</div>
+</body>
 </html>
+
+
+<script language="JavaScript">
+    function gotoFormUpload() {
+        window.location="form_upload.jsp";
+    }
+    function gotoFileUpload() {
+        window.location="../file_upload/file_upload.jsp";
+    }
+    function gotoRainfallUpload() {
+//        window.location="../rainfall_upload.jsp";
+    }
+</script>
