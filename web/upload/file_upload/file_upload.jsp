@@ -14,7 +14,7 @@
     <title>Upload your file here</title>
     <ul class="inlineList">
         <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="../../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="../../queries/searchPage.jsp"><i class="menu-button"></i> Search</a></li>
         <li><a href="../upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class = row/>

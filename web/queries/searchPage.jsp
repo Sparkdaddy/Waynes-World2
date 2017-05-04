@@ -19,7 +19,7 @@
     <title>This is my template now</title>
     <ul class="inlineList">
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="searchPage.jsp"><i class="menu-button"></i> Search</a></li>
         <li><a href="../upload/upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class="row" />
@@ -48,15 +48,15 @@
                     </tr>
                     <tr>
                         <td>Aquifer Code</td>
-                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="id"></td>
+                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
                     </tr>
                     <tr>
                         <td>Type Code</td>
-                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="id"></td>
+                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="code"></td>
                     </tr>
                     <tr>
                         <td>Owner</td>
-                        <td><input id="owner" class="wellKeys" type="text" placeholder="id"></td>
+                        <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
                     </tr>
                     <tr>
                         <td><button id="wellSub" name="wellKeys" value="wellTable" onclick="showDivButton('wellSub')"
@@ -66,7 +66,7 @@
             </div>
             <div id="wellTable" class="tables" style="display: none">
                 <h4 class="text-center"> Well Table</h4>
-                <form action="searching.jsp" method="post">
+                <form action="wellSearch.jsp" method="post">
                     <table class="table table-hover" border="1">
                         <tr>
                             <td>wellID</td>

@@ -19,7 +19,7 @@
   <title>Use me as a template</title>
   <ul class="inlineList">
     <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
-    <li><a href="${pageContext.request.contextPath}/queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+    <li><a href="${pageContext.request.contextPath}/queries/searchPage.jsp"><i class="menu-button"></i> Search</a></li>
     <li><a href="upload/upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
 
   </ul>
