@@ -14,18 +14,18 @@
     <ul class="inlineList">
         <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>
         <li><a href="../../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
-        <li><a href="upload_home.jsp"><i class="menu-button"></i> UPLOAD </a> </li>
+        <li><a href="upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class="row" />
 </head>
 
 <h2>Select the table to search through</h2>
 well upload:
-<input type="radio" name="table" value="formDiv" onclick="gotoFormUpload()">
+<input type="button" name="table" onclick="gotoFormUpload()">
 <br> file upload:
-<input type="radio" name="table" value="transDiv" onclick="gotoFileUpload()">
+<input type="button" name="table" onclick="gotoFileUpload()">
 <br>rainfall upload:
-<input type="radio" name="table" value="locDiv" onclick="gotoRainfallUpload()">
+<input type="button" name="table" onclick="gotoRainfallUpload()">
 <br/>
 
 <body>
@@ -41,6 +41,6 @@ well upload:
         window.location="file_upload/file_upload.jsp";
     }
     function gotoRainfallUpload() {
-//        window.location="rainfall_upload/rainfall_upload.jsp";
+        window.location="rainfall_upload/rainfall_upload.jsp";
     }
 </script>

@@ -22,11 +22,11 @@
 
 <h2>Select the table to search through</h2>
 well upload:
-<input type="radio" name="table" value="formDiv" onclick="gotoFormUpload()">
+<input type="button" name="table" onclick="gotoFormUpload()">
 <br> file upload:
-<input type="radio" name="table" value="transDiv" onclick="gotoFileUpload()">
+<input type="button" name="table" onclick="gotoFileUpload()">
 <br>rainfall upload:
-<input type="radio" name="table" value="locDiv" onclick="gotoRainfallUpload()">
+<input type="button" name="table" onclick="gotoRainfallUpload()">
 <br/>
 
 <script language="JavaScript">
@@ -37,7 +37,7 @@ well upload:
         window.location="file_upload.jsp";
     }
     function gotoRainfallUpload() {
-//        window.location="../rainfall_upload/rainfall_upload.jsp";
+        window.location="../rainfall_upload/rainfall_upload.jsp";
     }
 </script>
 
