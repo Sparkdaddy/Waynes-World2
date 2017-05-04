@@ -15,13 +15,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" type="text/css" href="../overall.css">
     <title>Upload your forms here</title>
-    <%--<ul class="inlineList">--%>
-        <%--<li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>--%>
-        <%--<li><a href="../file_upload/file_upload.jsp"><i class="menu-button"></i> File upload</a> </li>--%>
-        <%--<li><a href="form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>--%>
-        <%--<li><a href="../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>--%>
-    <%--</ul>--%>
+    <ul class="inlineList">
+        <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
+        <li><a href="../file_upload/file_upload.jsp"><i class="menu-button"></i> File upload</a> </li>
+        <li><a href="form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
+        <li><a href="../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+    </ul>
     <hr class="row" />
 </head>
 

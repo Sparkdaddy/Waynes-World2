@@ -8,12 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 
-<html>
-<head>
-    'sup buttercup
-</head>
-</html>
-
 <%
     Boolean success = false;
     String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
@@ -106,7 +100,7 @@
                 if( ((usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock")) && ((diameter >= 0) || (diameter == -1))
                         && (depth != -1) && (!aquafier_code.equals("")) && (land_elevation >= bottom_elevation) && (!state.equals("")) &&
                         (!county.equals("")) && (!type_code.equals("")) && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
-                        && (180 >= longitude) && type_code.length() == 1) {
+                        && (180 >= longitude) && type_code.length() == 1) ){
 
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
