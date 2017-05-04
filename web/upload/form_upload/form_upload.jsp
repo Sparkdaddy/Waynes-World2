@@ -8,7 +8,9 @@
   User: Sparky
   Date: 4/27/17
   Time: 8:50 AM
-  To change this template use File | Settings | File Templates.
+
+  !!checkout this link!!
+  https://www.w3schools.com/jsref/dom_obj_document.asp
 --%>
 
 
