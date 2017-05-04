@@ -59,11 +59,12 @@
                         <td><input id="owner" class="wellKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
-                        <td><button id="wellSub" name="wellKeys" value="wellTable" onclick="showDivButton('wellSub')"></button></td>
+                        <td><button id="wellSub" name="wellKeys" value="wellTable" onclick="showDivButton('wellSub')"
+                                    onkeypress="subButton()">Submit</button></td>
                     </tr>
                 </table>
             </div>
-            <div class="wellTable" style="display: none">
+            <div id="wellTable" class="tables" style="display: none">
                 <h4 class="text-center"> Well Table</h4>
                 <form action="searching.jsp" method="post">
                     <table class="table table-hover" border="1">
@@ -146,8 +147,8 @@
                             out.println("<h1> error: "+ e.getMessage()+"</h1>");
                         }
                     %>
-
-            </form>
+                </form>
+            </div>
         </div>
         <div id="transDiv" style="display: none">
             this is the transducer bit
@@ -156,20 +157,23 @@
             Transducer ID:
             <input type="text" name="transId">
             <input type="submit" name="submit" value="Submit" onclick="showTransSubmitDiv()">
-
+            <div id="Submit" style="display: none">
+                This is a test lol.
+                <script language="JavaScript">
+                    var id = document.getElementsByName('transId').value;
+                </script>
+            </div>
         </div>
         <div id="locDiv" style="display: none">
             this the location bit
         </div>
-        <div id="Submit" style="display: none">
-            This is a test lol.
-            <script language="JavaScript">
-                var id = document.getElementByName('transId').value;
-            </script>
-        </div>
     </div>
 
     <script>
+        function subButton() {
+
+        }
+
         function showDivCheckbox() {
             var x;
             var check = document.getElementsByName('tables');
@@ -189,17 +193,17 @@
             name.style.display = 'block';
         }
 
-        function showDivButton() {
-            var butt = document.getElementsByName('');
+        function showDivButton(name) {
+            var butt = document.getElementById(name);
             var x = document.getElementById(butt.value);
             x.style.display = "block";
-            console.log("opening" + butt.value);
         }
 
         function uncheck(val) {
             var x = document.getElementById(val);
             x.checked = false;
             document.getElementById(x.value).style.display = 'none';
+            location.reload(true);
         }
     </script>
 </body>
