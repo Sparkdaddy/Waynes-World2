@@ -31,17 +31,20 @@ public class UploadServlet extends HttpServlet {
         String[] parts = fileContent.split("\\,|\\n|\\t");
 
         Boolean success = true;
+        Boolean enoughFields = true;
         String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
         String USER = "ritSpaGee";
         String PASS = "geeterman";
         double wellID;
         //Messages to be displayed when upload is completed.
         PrintWriter out = response.getWriter();
-        String noEndOnForm = "<script language=\"Javascript\"> window.alert(\"The end column was not set. Please try again\"); \n" +
+        String noEndOnFormMessage = "<script language=\"Javascript\"> window.alert(\"The end column was not set. Please try again\"); \n" +
                 "window.location = \"file_upload/file_upload.jsp\"; </script>;";
-        String successfulUpload = "<script language=\"Javascript\"> window.alert(\"Data insertion successful!\"); \n" +
+        String successfulUploadMessage = "<script language=\"Javascript\"> window.alert(\"Data insertion successful!\"); \n" +
                 "window.location = \"file_upload/file_upload.jsp\"; </script>;";
-        String failedUpload = "<script language=\"Javascript\"> window.alert(\"Data was not uploaded correctly. Check for commas in the upload form.\");\n " +
+        String failedUploadMessage = "<script language=\"Javascript\"> window.alert(\"Data was not uploaded correctly. Check for commas in the upload form.\");\n " +
+                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+        String notEnoughFieldsMessage ="<script language=\"Javascript\"> window.alert(\"Data was not uploaded. File did not have proper fields or sensor id was not entered.\");\n " +
                 "window.location = \"file_upload/file_upload.jsp\"; </script>;";
 
         Connection conn;
@@ -208,11 +211,11 @@ public class UploadServlet extends HttpServlet {
                                             casingID = Double.parseDouble(temp);
                                         break;
                                     case "land_elevation":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             land_elevation = Double.parseDouble(temp);
                                         break;
                                     case "water_level_elevation":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             water_level_elevation = Double.parseDouble(temp);
                                         break;
                                     case "usage":
@@ -225,19 +228,19 @@ public class UploadServlet extends HttpServlet {
                                         comment = temp;
                                         break;
                                     case "diameter":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             diameter = Double.parseDouble(temp);
                                         break;
                                     case "top_depth":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             top_depth = Double.parseDouble(temp);
                                         break;
                                     case "bottom_depth":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             bottom_depth = Double.parseDouble(temp);
                                         break;
                                     case "bottom_elevation":
-                                        if(!parts[(i*j) +j].isEmpty())
+                                        if(!parts[(i*end) +j].isEmpty())
                                             bottom_elevation = Double.parseDouble(temp);
                                         break;
                                     case "owner_name":
@@ -282,6 +285,7 @@ public class UploadServlet extends HttpServlet {
                                     stmt.addBatch(sql);
                                 } else {
                                     System.out.println("Well upload has invalid data. \n" + sql);
+                                    enoughFields = false;
                                     success = false;
                                 }
                             }
@@ -299,7 +303,8 @@ public class UploadServlet extends HttpServlet {
                             }
                         }
                     }
-                    stmt.executeBatch();
+                    if(success)
+                        stmt.executeBatch();
                 } catch (SQLException se) {
                     //Handle errors for JDBC
                     se.printStackTrace();
@@ -325,11 +330,13 @@ public class UploadServlet extends HttpServlet {
                 }//end try
 
                 if (success && end != -1) {
-                    out.println(successfulUpload);
+                    out.println(successfulUploadMessage);
                 } else if (end == -1) {
-                    out.println(noEndOnForm);
+                    out.println(noEndOnFormMessage);
+                } else if (!enoughFields) {
+                    out.println(notEnoughFieldsMessage);
                 } else {
-                    out.println(failedUpload);
+                    out.println(failedUploadMessage);
                 }
                 break;
 
@@ -380,7 +387,7 @@ public class UploadServlet extends HttpServlet {
                                     hourTime = parts[(i * 8) + j];
                                     date = date + " " + hourTime;
                                     dateTime = userFormat.parse(date);
-                                    System.out.println(dateTime);
+//                                    System.out.println(dateTime);
                                     break;
                                 case 3:
                                     if(!parts[(i*8) + j].isEmpty())
@@ -408,9 +415,10 @@ public class UploadServlet extends HttpServlet {
                             }
                         }
                         calendar.setTime(dateTime);
-                        System.out.println(calendar);
+//                        System.out.println(calendar);
                         date = sqlFormat.format(calendar.getTime());
-                        System.out.println(date);
+//                        System.out.println(date);
+                        Integer testYear = date.charAt(0) + date.charAt(1) + date.charAt(2) + date.charAt(3);
 
                         String sql = "";
                         if (!transID.equals("")) {
@@ -419,18 +427,26 @@ public class UploadServlet extends HttpServlet {
                                     "pressure, TDS) VALUES (" + "\"" + transID + "\"" + ',' + "\"" + date + "\"" +
                                     ',' + salinity + ',' + temperature + ',' + conductivity + ',' + pressure + ',' +
                                     TDS + ");";
-                            if ((!date.equals("")) && (!hourTime.equals("")) && temperature != 99999 && conductivity != 99999 && pressure != 99999
-                                    && salinity != 99999 && TDS != 99999) {
+                            if ((!date.equals("")) && (!hourTime.equals("")) && temperature != 99999 &&
+                                    conductivity != 99999 && pressure != 99999 && salinity != 99999 && TDS != 99999 &&
+                                    (testYear >= 1900) && testYear <= 2020 ) {
 
                                 System.out.println(sql);
                                 stmt.addBatch(sql);
                             } else {
                                 System.out.println("Sensor data has invalid data. \n" + sql);
                                 success = false;
+                                enoughFields = false;
                             }
                         }
+                        else {
+                            System.out.println("Trans or sensor info was not entered!");
+                            success = false;
+                            enoughFields = false;
+                        }
                     }
-                    stmt.executeBatch();
+                    if(success)
+                        stmt.executeBatch();
                 } catch (SQLException se) {
                     //Handle errors for JDBC
                     se.printStackTrace();
@@ -456,13 +472,16 @@ public class UploadServlet extends HttpServlet {
                 }//end try
 
                 if (success) {
-                    out.println(successfulUpload);
+                    out.println(successfulUploadMessage);
+                } else if (!enoughFields) {
+                    out.println(notEnoughFieldsMessage);
                 } else {
-                    out.println(failedUpload);
+                    out.println(failedUploadMessage);
                 }
                 break;
 
             default:
+                out.println(failedUploadMessage);
                 break;
         }
     }

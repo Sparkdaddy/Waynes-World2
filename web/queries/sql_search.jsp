@@ -17,21 +17,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="../overall.css">
     <title>This is my template now</title>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="inlineList">
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="../file_upload/file_upload.jsp"><i class="menu-button"></i> File upload</a> </li>
-        <li><a href="../form_upload/form_upload.jsp"><i class="menu-button"></i> Form upload</a></li>
-        <li><a href="sql_search.jsp"><i class="fa fa-comment"></i> Search</a></li>
+        <li><a href="sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="../upload/upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class="row" />
 </head>
 <br/>
 <body>
-    <h2>Select the table to search through</h2>
+    <h2>Select the search you would like to do</h2>
     well:
     <input id="wellchk" type="radio" name="tables" value="wellDiv" onclick="showDivCheckbox()" ondblclick="uncheck('wellchk')">
     transducer:
     <input id="transchk" type="radio" name="tables" value="transDiv" onclick="showDivCheckbox()" ondblclick="uncheck('transchk')">
+    transducer advanced analysis:
+    <input id="analysis" type="radio" name="tables" value="anDiv" onclick="showDivCheckbox()" ondblclick="uncheck('analysis')">
     location:
     <input id="locchk" type="radio" name="tables" value="locDiv" onclick="showDivCheckbox()" ondblclick="uncheck('locchk')">
     <br/>
@@ -146,14 +147,25 @@
                         }
                     %>
 
-                </form>
-            </div>
+            </form>
         </div>
         <div id="transDiv" style="display: none">
             this is the transducer bit
         </div>
+        <div id="anDiv" style="display: none">
+            Transducer ID:
+            <input type="text" name="transId">
+            <input type="submit" name="submit" value="Submit" onclick="showTransSubmitDiv()">
+
+        </div>
         <div id="locDiv" style="display: none">
             this the location bit
+        </div>
+        <div id="Submit" style="display: none">
+            This is a test lol.
+            <script language="JavaScript">
+                var id = document.getElementByName('transId').value;
+            </script>
         </div>
     </div>
 
@@ -170,6 +182,11 @@
                     x.style.display = 'none';
                 }
             }
+        }
+
+        function showTransSubmitDiv(){
+            var name = document.getElementById('Submit');
+            name.style.display = 'block';
         }
 
         function showDivButton() {
