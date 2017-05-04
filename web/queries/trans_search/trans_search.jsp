@@ -31,28 +31,32 @@
 <body>
     <div id="wellDiv">
         <br/>
-        <h5>Enter the Well information</h5>
+        <h5>Enter the Transducer information</h5>
         <div id="input">
             <form action="transSearch.jsp">
                 <table class="table">
                     <tr>
-                        <td>Unique WellID</td>
-                        <td><input id="id" class="wellKeys" type="text" placeholder="id"></td>
+                        <td>Sensor ID</td>
+                        <td><input class="transKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
-                        <td>Aquifer Code</td>
-                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td>Well ID</td>
+                        <td><input class="transKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
-                        <td>Type Code</td>
-                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td>Time (begin)</td>
+                        <td><input class="transKeys" type="text" placeholder="hh:mm:ss"></td>
                     </tr>
                     <tr>
-                        <td>Owner</td>
-                        <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
+                        <td>Time (end)</td>
+                        <td><input class="transKeys" type="text" placeholder="hh:mm:ss"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="wellTable"></td>
+                        <td>Would you like rainfall information:</td>
+                        <td><input class="transKeys" type="radio"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit"></td>
                     </tr>
                 </table>
             </form>

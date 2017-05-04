@@ -52,7 +52,7 @@
                         <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="wellTable"></td>
+                        <td><input type="submit" value="Submit"></td>
                     </tr>
                 </table>
             </form>

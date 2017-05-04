@@ -31,28 +31,28 @@
 <body>
     <div id="wellDiv">
         <br/>
-        <h5>Enter the Well information</h5>
+        <h5>Enter the Location information</h5>
         <div id="input">
             <form action="locSearch.jsp">
                 <table class="table">
                     <tr>
-                        <td>Unique WellID</td>
-                        <td><input id="id" class="wellKeys" type="text" placeholder="id"></td>
+                        <td>Latitude (min)</td>
+                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
-                        <td>Aquifer Code</td>
-                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td>Latitude (max)</td>
+                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
-                        <td>Type Code</td>
-                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td>Longitude (min)</td>
+                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
-                        <td>Owner</td>
-                        <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
+                        <td>Longitude (max)</td>
+                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="wellTable"></td>
+                        <td><input type="submit" value="Submit"></td>
                     </tr>
                 </table>
             </form>

@@ -31,31 +31,18 @@
 <body>
     <div id="wellDiv">
         <br/>
-        <h5>Enter the Well information</h5>
+        <h5>Choose the search feature</h5>
         <div id="input">
-            <form action="advTransSearch.jsp">
-                <table class="table">
-                    <tr>
-                        <td>Unique WellID</td>
-                        <td><input id="id" class="wellKeys" type="text" placeholder="id"></td>
-                    </tr>
-                    <tr>
-                        <td>Aquifer Code</td>
-                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
-                    </tr>
-                    <tr>
-                        <td>Type Code</td>
-                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="code"></td>
-                    </tr>
-                    <tr>
-                        <td>Owner</td>
-                        <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="wellTable"></td>
-                    </tr>
-                </table>
-            </form>
+            <table class="table">
+                <tr>
+                    <td>Search Feature 1</td>
+                    <td><input class="transSearch" type="button" value="Search" onclick="goto('advTransSearch1.jsp')"></td>
+                </tr>
+                <tr>
+                    <td>Search Feature 2</td>
+                    <td><input class="transSearch" type="button" value="Search" onclick="goto('advTransSearch2.jsp')"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
