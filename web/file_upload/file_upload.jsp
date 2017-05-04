@@ -31,7 +31,7 @@
         </p>
     </div>
     <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>
-    <form action="/file_upload" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/file_upload" method="post" enctype="multipart/form-data">
         <div class="row">
             <table class="table table-hover">
                 <tr>

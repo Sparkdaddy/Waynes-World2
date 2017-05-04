@@ -19,4 +19,4 @@ fronting fairly hard and wants to learn all of this shit.
 
 
 # Middle fingers so far
-count = 6
+count = 8
