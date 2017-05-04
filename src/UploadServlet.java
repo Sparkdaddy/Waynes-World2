@@ -418,7 +418,7 @@ public class UploadServlet extends HttpServlet {
 //                        System.out.println(calendar);
                         date = sqlFormat.format(calendar.getTime());
 //                        System.out.println(date);
-                        Integer testYear = date.charAt(0) + date.charAt(1) + date.charAt(2) + date.charAt(3);
+                        Integer testYear = Integer.parseInt(date.substring(0,4));
 
                         String sql = "";
                         if (!transID.equals("")) {

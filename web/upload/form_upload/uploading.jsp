@@ -69,7 +69,6 @@
     String trans_type = request.getParameter("trans_type");
 
 
-    //double (and other primitive types) evaluate to zero if null.
     if (wellID == 0 && owner_name == "" && transID == "") { }
     else {
         Connection conn = null;
@@ -136,10 +135,10 @@
             }
 
             //trans input present.
-            if (transID != "") {
+            if (!transID.equals("")) {
                 sql = "INSERT INTO ritSpaGee.Transducer (transID, wellID, type, name) VALUES (" + "\"" + transID
                         + "\"" + ',' + wellID + ',' + "\"" + trans_type + "\"" + ',' + "\"" + trans_name + "\"" + ");";
-                if(trans_name != "" && trans_type != "") {
+                if(!trans_name.equals("") && !trans_type.equals("")) {
                     System.out.println(sql);
                     stmt.executeUpdate(sql);
                     success = true;
