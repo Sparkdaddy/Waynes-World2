@@ -26,12 +26,9 @@
 </head>
 
 <h2>Select the table to search through</h2>
-well upload:
-<input type="button" name="table" onclick="gotoFormUpload()">
-<br> file upload:
-<input type="button" name="table" onclick="gotoFileUpload()">
-<br>rainfall upload:
-<input type="button" name="table" onclick="gotoRainfallUpload()">
+<input type="button" name="table" value="well upload" onclick="gotoFormUpload()">
+<input type="button" name="table" value="file upload" onclick="gotoFileUpload()">
+<input type="button" name="table" value="rainfall upload" onclick="gotoRainfallUpload()">
 <br/>
 
 <body>

@@ -6,30 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="../../overall.css">
+    <link rel="stylesheet" type="text/css" href="../overall.css">
     <title>Upload your forms here</title>
     <ul class="inlineList">
-        <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>
-        <li><a href="../../queries/sql_search.jsp"><i class="menu-button"></i> Search</a></li>
+        <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
+        <li><a href="../queries/searchPage.jsp"><i class="menu-button"></i> Search</a></li>
         <li><a href="upload_home.jsp"><i class="menu-button"></i> Upload </a> </li>
     </ul>
     <hr class="row" />
 </head>
 
-<h2>Select the table to search through</h2>
-well upload:
-<input type="button" name="table" onclick="gotoFormUpload()">
-<br> file upload:
-<input type="button" name="table" onclick="gotoFileUpload()">
-<br>rainfall upload:
-<input type="button" name="table" onclick="gotoRainfallUpload()">
-<br/>
-
 <body>
-
+    <h2>Select the table to search through</h2>
+    <input type="button" name="table" value="well upload" onclick="gotoFormUpload()">
+    <input type="button" name="table" value="file upload" onclick="gotoFileUpload()">
+    <input type="button" name="table" value="rainfall upload" onclick="gotoRainfallUpload()">
+    <br/>
 </body>
 </html>
 
