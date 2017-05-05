@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <div id="nav_bar">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="../../overall.css">
@@ -19,6 +20,7 @@
         </ul>
         <hr class="row" />
     </div>
+
     <div id="searchPages">
         <h2>Select the search you would like to do</h2>
         <input id="wellchk" type="button" name="tables" value="well" onclick="goto('../well_search/well_search.jsp')">
@@ -27,24 +29,15 @@
         <input id="locchk" type="button" name="tables" value="location" onclick="goto('../loc_search/loc_search.jsp')">
         <br/>
     </div>
+
 </head>
+
 <body>
-    <div id="wellDiv">
-        <br/>
-        <h5>Choose the search feature</h5>
-        <div id="input">
-            <table class="table">
-                <tr>
-                    <td>Search Feature 1</td>
-                    <td><input class="transSearch" type="button" value="Search" onclick="goto('advTransSearch1.jsp')"></td>
-                </tr>
-                <tr>
-                    <td>Search Feature 2</td>
-                    <td><input class="transSearch" type="button" value="Search" onclick="goto('advTransSearch2.jsp')"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <form name="trans" method="get" action="advTransSearch.jsp">
+            Transducer ID:
+            <input type="text" name="transId" id="transId">
+            <input type="submit" value="Search">
+    </form>
 </body>
 </html>
 
