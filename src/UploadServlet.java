@@ -29,6 +29,8 @@ public class UploadServlet extends HttpServlet {
              fileContent = buffer.lines().collect(Collectors.joining("\n"));
         }
         String[] parts = fileContent.split("\\,|\\n|\\t");
+//        Split by quotation marks?
+//        while(fileContent)
 
         Boolean success = true;
         Boolean enoughFields = true;
@@ -39,13 +41,13 @@ public class UploadServlet extends HttpServlet {
         //Messages to be displayed when upload is completed.
         PrintWriter out = response.getWriter();
         String noEndOnFormMessage = "<script language=\"Javascript\"> window.alert(\"The end column was not set. Please try again\"); \n" +
-                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+                "window.location = \"upload/file_upload/file_upload.jsp\"; </script>;";
         String successfulUploadMessage = "<script language=\"Javascript\"> window.alert(\"Data insertion successful!\"); \n" +
-                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+                "window.location = \"upload/file_upload/file_upload.jsp\"; </script>;";
         String failedUploadMessage = "<script language=\"Javascript\"> window.alert(\"Data was not uploaded correctly. Check for commas in the upload form.\");\n " +
-                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+                "window.location = \"upload/file_upload/file_upload.jsp\"; </script>;";
         String notEnoughFieldsMessage ="<script language=\"Javascript\"> window.alert(\"Data was not uploaded. File did not have proper fields or sensor id was not entered.\");\n " +
-                "window.location = \"file_upload/file_upload.jsp\"; </script>;";
+                "window.location = \"upload/file_upload/file_upload.jsp\"; </script>;";
 
         Connection conn;
         Statement stmt;
@@ -75,62 +77,78 @@ public class UploadServlet extends HttpServlet {
                 String owner_name;
                 String owner_type;
 
+//                //Check for file headings.
+//                Boolean headingsFound = false;
+//                int headingsStartLoc = -1;
+//                for(int i = 0; i < parts.length && !headingsFound; i++) {
+//                    if(parts[i] == "StateWellNumber") {
+//                        headingsFound = true;
+//                        headingsStartLoc = i;
+//                    }
+//                }
+
                 Map<Integer, String> fieldStringMap = new HashMap<>();
                 int end = -1;
                 //Mapping the column locations to the relevant variables.
-                for (int i = 1; i < 35; i++) {
-                    String value;
-                    temp = "field" + i;
-                    value = request.getParameter(temp);
+//                if(headingsFound) {
+//                    for(int i = headingsStartLoc; i < parts.length; i++) {
+//
+//                    }
+//                }
+//                else {
+                    for (int i = 1; i < 35; i++) {
+                        String value;
+                        temp = "field" + i;
+                        value = request.getParameter(temp);
 
-                    if (!value.isEmpty()) {
-                        if (value.equals("wellID")) {
-                            fieldStringMap.put(i-1, "wellID");
-                        } else if (value.equals("Latitude")) {
-                            fieldStringMap.put(i-1, "latitude");
-                        } else if (value.equals("Longitude")) {
-                            fieldStringMap.put(i-1, "longitude");
-                        } else if (value.equals("county")) {
-                            fieldStringMap.put(i-1, "county");
-                        } else if (value.equals("Aquifercode")) {
-                            fieldStringMap.put(i-1, "aquafier_code");
-                        } else if (value.equals("state") ) {
-                            fieldStringMap.put(i-1, "state");
-                        } else if (value.equals("wellTypeCode")) {
-                            fieldStringMap.put(i-1, "type_code");
-                        } else if (value.equals("wellDepth") ) {
-                            fieldStringMap.put(i-1, "depth");
-                        } else if (value.equals("casingID") ) {
-                            fieldStringMap.put(i-1, "casingID");
-                        } else if (value.equals("landSurfaceElevation")) {
-                            fieldStringMap.put(i-1, "land_elevation");
-                        } else if (value.equals("WaterElevation")) {
-                            fieldStringMap.put(i-1, "water_level_elevation");
-                        } else if (value.equals("bottomElevation")) {
-                            fieldStringMap.put(i-1, "bottom_elevation");
-                        } else if (value.equals("WellUse")) {
-                            fieldStringMap.put(i-1, "usage");
-                        } else if (value.equals("pump")) {
-                            fieldStringMap.put(i-1, "pump_description");
-                        } else if (value.equals("comments")) {
-                            fieldStringMap.put(i-1, "comment");
-                        } else if (value.equals("diameter")) {
-                            fieldStringMap.put(i-1, "diameter");
-                        } else if (value.equals("owner")) {
-                            fieldStringMap.put(i-1, "owner_name");
-                        } else if (value.equals("ownerType")) {
-                            fieldStringMap.put(i - 1, "owner_type");
-                        } else if (value.equals("topDepth")) {
-                            fieldStringMap.put(i-1, "top_depth");
-                        } else if (value.equals("bottomDepth")) {
-                            fieldStringMap.put(i-1, "bottom_depth");
-                        //End is used to tell us where the end of the columns are located
-                        } else if(value.equals("end")) {
-                            end = i - 1;
+                        if (!value.isEmpty()) {
+                            if (value.equals("wellID")) {
+                                fieldStringMap.put(i - 1, "wellID");
+                            } else if (value.equals("Latitude")) {
+                                fieldStringMap.put(i - 1, "latitude");
+                            } else if (value.equals("Longitude")) {
+                                fieldStringMap.put(i - 1, "longitude");
+                            } else if (value.equals("county")) {
+                                fieldStringMap.put(i - 1, "county");
+                            } else if (value.equals("Aquifercode")) {
+                                fieldStringMap.put(i - 1, "aquafier_code");
+                            } else if (value.equals("state")) {
+                                fieldStringMap.put(i - 1, "state");
+                            } else if (value.equals("wellTypeCode")) {
+                                fieldStringMap.put(i - 1, "type_code");
+                            } else if (value.equals("wellDepth")) {
+                                fieldStringMap.put(i - 1, "depth");
+                            } else if (value.equals("casingID")) {
+                                fieldStringMap.put(i - 1, "casingID");
+                            } else if (value.equals("landSurfaceElevation")) {
+                                fieldStringMap.put(i - 1, "land_elevation");
+                            } else if (value.equals("WaterElevation")) {
+                                fieldStringMap.put(i - 1, "water_level_elevation");
+                            } else if (value.equals("bottomElevation")) {
+                                fieldStringMap.put(i - 1, "bottom_elevation");
+                            } else if (value.equals("WellUse")) {
+                                fieldStringMap.put(i - 1, "usage");
+                            } else if (value.equals("pump")) {
+                                fieldStringMap.put(i - 1, "pump_description");
+                            } else if (value.equals("comments")) {
+                                fieldStringMap.put(i - 1, "comment");
+                            } else if (value.equals("diameter")) {
+                                fieldStringMap.put(i - 1, "diameter");
+                            } else if (value.equals("owner")) {
+                                fieldStringMap.put(i - 1, "owner_name");
+                            } else if (value.equals("ownerType")) {
+                                fieldStringMap.put(i - 1, "owner_type");
+                            } else if (value.equals("topDepth")) {
+                                fieldStringMap.put(i - 1, "top_depth");
+                            } else if (value.equals("bottomDepth")) {
+                                fieldStringMap.put(i - 1, "bottom_depth");
+                                //End is used to tell us where the end of the columns are located
+                            } else if (value.equals("end")) {
+                                end = i - 1;
+                            }
                         }
                     }
-
-                }
+//                }
 
                 conn = null;
                 stmt = null;
