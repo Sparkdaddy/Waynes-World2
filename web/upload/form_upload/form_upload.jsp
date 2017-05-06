@@ -39,7 +39,7 @@
             <h3 class="text-center"> Insert all the data </h3>
         </div>
         <%--Note: action tells the form tag where to send the data once the submit button is clicked.--%>
-        <form action="uploading.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/form_upload" method="post" enctype="multipart/form-data">
             <div class="row">
                 <table class="table table-hover">
                     <tr>
