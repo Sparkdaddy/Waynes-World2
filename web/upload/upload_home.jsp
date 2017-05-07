@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="../overall.css">
-    <title>Upload your forms here</title>
+    <title>Water Management</title>
     <ul class="inlineList">
         <li><a href="../index.jsp"><i class="menu-button"></i> Home</a></li>
         <li><a href="../queries/searchPage.jsp"><i class="menu-button"></i> Search</a></li>

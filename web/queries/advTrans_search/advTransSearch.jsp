@@ -18,7 +18,7 @@
     <div id="nav_bar">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="../../overall.css">
-        <title>Advanced Transducer Analysis</title>
+        <title>Water Management</title>
 
         <ul class="inlineList">
             <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>

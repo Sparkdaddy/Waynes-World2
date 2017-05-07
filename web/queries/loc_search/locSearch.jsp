@@ -12,7 +12,7 @@
     <div id="nav_bar">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="../../overall.css">
-        <title>This is my template now</title>
+        <title>Water Management</title>
         <ul class="inlineList">
             <li><a href="../../index.jsp"><i class="menu-button"></i> Home</a></li>
             <li><a href="../searchPage.jsp"><i class="menu-button"></i> Search</a></li>
@@ -34,55 +34,134 @@
         <span class="clsX" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Error: </strong>
     </div>
-    <div id="wellTable" class="tables">
-        <h4 class="text-center"> Location Table</h4>
-        <table class="table" border="1">
-            <tr>
-                <td>wellID</td>
-            </tr>
-            <%
-                try
-                {
-                    String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
-                    String USER = "ritSpaGee";
-                    String PASS = "geeterman";
-                    Connection conn = null;
-                    Statement stmt = null;
-                    //STEP 2: Register JDBC driver
-                    Class.forName("com.mysql.jdbc.Driver");
-                    //STEP 3: Open a connection
-                    System.out.println("Connecting to database...");
-                    conn = DriverManager.getConnection(DB_URL,USER,PASS);
-                    //STEP 4: Execute a query
-                    System.out.println("Creating statement...");
-                    stmt = conn.createStatement();
-                    String sql;
+    <%
+    try
+    {
+        String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
+        String USER = "ritSpaGee";
+        String PASS = "geeterman";
+        Connection conn = null;
+        Statement stmt = null;
+        //STEP 2: Register JDBC driver
+        Class.forName("com.mysql.jdbc.Driver");
+        //STEP 3: Open a connection
+        System.out.println("Connecting to database...");
+        conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        //STEP 4: Execute a query
+        System.out.println("Creating statement...");
+        stmt = conn.createStatement();
+        String sql;
 
-                    sql = "SELECT * from ritSpaGee.Well";
-                    ResultSet rs = stmt.executeQuery(sql);
+        sql = "SELECT * from ritSpaGee.Well";
+        ResultSet rs = stmt.executeQuery(sql);
 
-                    while(rs.next())
-                    {
-            %>
-            <tr>
-                <td><a type="button" name="locTup"><%=rs.getInt("wellID")%></a></td>
-            </tr>
-            <%
-                }
-            %>
-        </table>
+    %>
+    <div class="locTable">
+        <ul class="locList">
+            <li><div id="locTable" class="tables">
+                <h4 class="text-center"> Location Table</h4>
+                <table class="table" border="1">
+                    <tr>
+                        <td>wellID</td>
+                    </tr>
         <%
-                rs.close();
-                stmt.close();
-                conn.close();
+            if(rs.isBeforeFirst()) {
+                while(rs.next())
+                {
+                    String wellID = rs.getString("wellID");
+        %>
+                    <tr>
+                        <td><a href="#" name="locTup" onclick="showDiv(<%=wellID%>)"><%=wellID%></a></td>
+                    </tr>
+        <%
+                }
             }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-                out.println("<h1> error: "+ e.getMessage()+"</h1>");
+            else {
+                throw new Exception("No data");
             }
         %>
+                </table>
+            </div></li>
+
+            <li><div id="wellTable" class="tables">
+                <h4 class="text-center"> Well Table</h4>
+                <%
+                    rs = stmt.executeQuery(sql);
+
+                    if(rs.isBeforeFirst()) {
+                        while(rs.next())
+                        {
+                            String wellID = rs.getString("wellID");
+                %>
+                <table id="<%=wellID%>" class="table" style="display: none" border="1">
+                    <tr>
+                        <td>wellID</td>
+                        <td>usage</td>
+                        <td>aquafier_code</td>
+                        <td>type_code</td>
+                        <td>comment</td>
+                        <td>top_depth</td>
+                        <td>bottom_depth</td>
+                        <td>depth</td>
+                        <td>bottom_elevation</td>
+                        <td>water_level</td>
+                        <td>land_elevation</td>
+                        <td>diameter</td>
+                        <td>casing</td>
+                        <td>pump_description</td>
+                        <td>state</td>
+                        <td>county</td>
+                    </tr>
+
+                    <tr>
+                        <td><%=rs.getString("wellID")%></td>
+                        <td><%=rs.getString("usagee")%></td>
+                        <td><%=rs.getString("aquafier_code")%></td>
+                        <td><%=rs.getString("type_code")%></td>
+                        <td><%=rs.getString("comment")%></td>
+                        <td><%=rs.getString("top_depth")%></td>
+                        <td><%=rs.getString("bottom_depth")%></td>
+                        <td><%=rs.getString("depth")%></td>
+                        <td><%=rs.getString("bottom_elevation")%></td>
+                        <td><%=rs.getString("water_level_elevation")%></td>
+                        <td><%=rs.getString("land_elevation")%></td>
+                        <td><%=rs.getString("diameter")%></td>
+                        <td><%=rs.getString("casingID")%></td>
+                        <td><%=rs.getString("pump_description")%></td>
+                        <td><%=rs.getString("state")%></td>
+                        <td><%=rs.getString("county")%></td>
+                    </tr>
+        <%
+                }
+            }
+            else {
+                throw new Exception("No data");
+            }
+        %>
+                </table>
+            </div></li>
+        </ul>
     </div>
+    <%
+        rs.close();
+        stmt.close();
+        conn.close();
+    }
+    catch(Exception e)
+    {
+    %>
+    <script>
+        document.getElementById('locTable').style.display='none';
+        document.getElementById('alertDiv').style.display='block';
+        var node = document.createElement("A");
+        var x = document.createTextNode("<%=e.getMessage()%>");
+        node.appendChild(x);
+        document.getElementById('alertDiv').appendChild(node);
+    </script>
+    <%
+        }
+    %>
+
 </body>
 </html>
 
@@ -90,4 +169,49 @@
     function goto(page) {
         window.location=page;
     }
+    function showDiv(divIn) {
+        if(document.getElementById(divIn).style.display === "none") {
+            document.getElementById(divIn).style.display = "block";
+        }
+        else {
+            document.getElementById(divIn).style.display = "none";
+        }
+    }
 </script>
+<%--<div id="<%=wellID%>" style="display: none">--%>
+    <%--<tr>--%>
+        <%--<td>usage</td>--%>
+        <%--<td>aquafier_code</td>--%>
+        <%--<td>type_code</td>--%>
+        <%--<td>comment</td>--%>
+        <%--<td>top_depth</td>--%>
+        <%--<td>bottom_depth</td>--%>
+        <%--<td>depth</td>--%>
+        <%--<td>bottom_elevation</td>--%>
+        <%--<td>water_level</td>--%>
+        <%--<td>land_elevation</td>--%>
+        <%--<td>diameter</td>--%>
+        <%--<td>casing</td>--%>
+        <%--<td>pump_description</td>--%>
+        <%--<td>state</td>--%>
+        <%--<td>county</td>--%>
+
+    <%--</tr>--%>
+    <%--<tr>--%>
+        <%--<td><%=rs.getString("usagee")%></td>--%>
+        <%--<td><%=rs.getString("aquafier_code")%></td>--%>
+        <%--<td><%=rs.getString("type_code")%></td>--%>
+        <%--<td><%=rs.getString("comment")%></td>--%>
+        <%--<td><%=rs.getString("top_depth")%></td>--%>
+        <%--<td><%=rs.getString("bottom_depth")%></td>--%>
+        <%--<td><%=rs.getString("depth")%></td>--%>
+        <%--<td><%=rs.getString("bottom_elevation")%></td>--%>
+        <%--<td><%=rs.getString("water_level_elevation")%></td>--%>
+        <%--<td><%=rs.getString("land_elevation")%></td>--%>
+        <%--<td><%=rs.getString("diameter")%></td>--%>
+        <%--<td><%=rs.getString("casingID")%></td>--%>
+        <%--<td><%=rs.getString("pump_description")%></td>--%>
+        <%--<td><%=rs.getString("state")%></td>--%>
+        <%--<td><%=rs.getString("county")%></td>--%>
+    <%--</tr>--%>
+<%--</div>--%>

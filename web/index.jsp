@@ -16,7 +16,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="overall.css">
-    <title>Water Data Management</title>
+    <title>Water Management</title>
     <ul class="inlineList">
         <li><a href="index.jsp"><i class="menu-button"></i> Home</a></li>
         <li><a href="${pageContext.request.contextPath}/queries/searchPage.jsp"><i class="menu-button"></i> Search</a>
