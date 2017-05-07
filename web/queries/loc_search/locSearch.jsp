@@ -30,15 +30,15 @@
     </div>
 </head>
 <body>
+    <div id="alertDiv" class="alert" style="display: none">
+        <span class="clsX" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Error: </strong>
+    </div>
     <div id="wellTable" class="tables">
-        <h4 class="text-center"> Well Table</h4>
+        <h4 class="text-center"> Location Table</h4>
         <table class="table" border="1">
             <tr>
                 <td>wellID</td>
-                <td>state</td>
-                <td>county</td>
-                <td>latitude</td>
-                <td>longitude</td>
             </tr>
             <%
                 try
@@ -58,18 +58,14 @@
                     stmt = conn.createStatement();
                     String sql;
 
-                    sql = "SELECT wellID,state,county,latitude,longitude from ritSpaGee.Well";
+                    sql = "SELECT * from ritSpaGee.Well";
                     ResultSet rs = stmt.executeQuery(sql);
 
                     while(rs.next())
                     {
             %>
             <tr>
-                <td><%=rs.getInt("wellID")%></td>
-                <td><%=rs.getString("state")%></td>
-                <td><%=rs.getString("county")%></td>
-                <td><%=rs.getString("latitude")%></td>
-                <td><%=rs.getString("longitude")%></td>
+                <td><a type="button" name="locTup"><%=rs.getInt("wellID")%></a></td>
             </tr>
             <%
                 }

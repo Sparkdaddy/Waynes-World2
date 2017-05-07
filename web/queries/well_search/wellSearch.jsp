@@ -31,37 +31,81 @@
     </div>
 </head>
 <body>
+    <div id="alertDiv" class="alert" style="display: none">
+        <span class="clsX" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Error: </strong>
+    </div>
     <div id="wellTable" class="tables">
         <h4 class="text-center"> Well Table</h4>
         <table class="table" border="1">
-            <tr>
-                <td>wellID</td>
-                <td>usage</td>
-                <td>aquafier</td>
-                <td>type_code</td>
-                <td>comment</td>
-                <td>top_depth</td>
-                <td>bottom_depth</td>
-                <td>depth</td>
-                <td>bottom_elevation</td>
-                <td>water_level</td>
-                <td>land_elevation</td>
-                <td>diameter</td>
-                <td>casing</td>
-                <td>pump_description</td>
-                <td>state</td>
-                <td>county</td>
-                <td>latitude</td>
-                <td>longitude</td>
-            </tr>
+                <tr>
+                    <td>wellID</td>
+                    <td>usage</td>
+                    <td>aquafier_code</td>
+                    <td>type_code</td>
+                    <td>comment</td>
+                    <td>top_depth</td>
+                    <td>bottom_depth</td>
+                    <td>depth</td>
+                    <td>bottom_elevation</td>
+                    <td>water_level</td>
+                    <td>land_elevation</td>
+                    <td>diameter</td>
+                    <td>casing</td>
+                    <td>pump_description</td>
+                    <td>state</td>
+                    <td>county</td>
+                    <td>latitude</td>
+                    <td>longitude</td>
             <%
                 try
                 {
+                    //gathering parameters from user
+                    String sqlStmt,id,aquCode,typCode,owner;
+                    int reqired = 0;
+                    id = request.getParameter("wellId");
+                    aquCode = request.getParameter("aqua_Code");
+                    typCode = request.getParameter("type_Code");
+                    owner = request.getParameter("owner");
+
+                    //building sql statment
+                    sqlStmt = "SELECT * from ritSpaGee.Well w, ritSpaGee.Owner o where ";
+                    if(!id.isEmpty()) {
+                        sqlStmt += "w.wellID=" + id + " and ";
+                        reqired++;
+                    }
+                    if(!owner.isEmpty()) {
+                        sqlStmt += "o.name=\"" + owner + "\" and w.wellID = o.wellID and ";
+                        reqired++;
+            %>
+                    <td>owner</td>
+            <%
+                    }
+                    if(!aquCode.isEmpty()) {
+                        sqlStmt += "w.aquafier_code=\"" + aquCode + "\" and ";
+                        reqired++;
+                    }
+                    if(!typCode.isEmpty()) {
+                        sqlStmt += "w.type_code=\"" + typCode + "\"";
+                        reqired++;
+                    }
+                    if(sqlStmt.endsWith("and ")) {
+                        sqlStmt = sqlStmt.substring(0,sqlStmt.length()-4);
+                    }
+                    if(reqired < 1) {
+                        throw new Exception("at least one parameter must be entered");
+                    }
+                System.out.println(sqlStmt);
+            %>
+                </tr>
+            <%
+                    System.out.println(sqlStmt);
+                    //retieving
                     String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
                     String USER = "ritSpaGee";
                     String PASS = "geeterman";
                     Connection conn = null;
-                    Statement stmt = null;
+                    PreparedStatement pstmt;
                     //STEP 2: Register JDBC driver
                     Class.forName("com.mysql.jdbc.Driver");
                     //STEP 3: Open a connection
@@ -69,50 +113,86 @@
                     conn = DriverManager.getConnection(DB_URL,USER,PASS);
                     //STEP 4: Execute a query
                     System.out.println("Creating statement...");
-                    stmt = conn.createStatement();
-                    String sql;
+                    pstmt = conn.prepareStatement(sqlStmt);
+                    ResultSet rs = pstmt.executeQuery();
 
-                    sql = "SELECT * from ritSpaGee.Well";
-                    ResultSet rs = stmt.executeQuery(sql);
+                    String wellID = "";
+                    if(rs.isBeforeFirst()) {
+                        while(rs.next())
+                        {
+                            wellID = rs.getString("wellID");
+                        %>
+                <tr>
+                    <td><%=wellID%></td>
+                    <td><%=rs.getString("usagee")%></td>
+                    <td><%=rs.getString("aquafier_code")%></td>
+                    <td><%=rs.getString("type_code")%></td>
+                    <td><%=rs.getString("comment")%></td>
+                    <td><%=rs.getString("top_depth")%></td>
+                    <td><%=rs.getString("bottom_depth")%></td>
+                    <td><%=rs.getString("depth")%></td>
+                    <td><%=rs.getString("bottom_elevation")%></td>
+                    <td><%=rs.getString("water_level_elevation")%></td>
+                    <td><%=rs.getString("land_elevation")%></td>
+                    <td><%=rs.getString("diameter")%></td>
+                    <td><%=rs.getString("casingID")%></td>
+                    <td><%=rs.getString("pump_description")%></td>
+                    <td><%=rs.getString("state")%></td>
+                    <td><%=rs.getString("county")%></td>
+                    <td><%=rs.getString("latitude")%></td>
+                    <td><%=rs.getString("longitude")%></td>
+                            <%
+                            if(!owner.isEmpty()) {
+                            %>
+                                <td><%=rs.getString("name")%></td>
+                            <%
+                                }
+                            %>
+                </tr>
+                        <%
+                        }
+                    }
+                    else {
+                        //display input error
+                        String idUsed = "";
+                        if(!id.isEmpty()) {
+                            idUsed += "wellID=" + id + ", ";
+                        }
+                        if(!owner.isEmpty()) {
+                            idUsed += "owner=" +owner + ", ";
+                        }
+                        if(!aquCode.isEmpty()) {
+                            idUsed += "aquifer_code=" + aquCode + ", ";
+                        }
+                        if(!typCode.isEmpty()) {
+                            idUsed += "type_code=" + typCode;
+                        }
 
-                    while(rs.next())
-                    {
-            %>
-            <tr>
-                <td><%=rs.getInt("wellID")%></td>
-                <td><%=rs.getString("usagee")%></td>
-                <td><%=rs.getString("aquafier_code")%></td>
-                <td><%=rs.getString("type_code")%></td>
-                <td><%=rs.getString("comment")%></td>
-                <td><%=rs.getString("top_depth")%></td>
-                <td><%=rs.getString("bottom_depth")%></td>
-                <td><%=rs.getString("depth")%></td>
-                <td><%=rs.getString("bottom_elevation")%></td>
-                <td><%=rs.getString("water_level_elevation")%></td>
-                <td><%=rs.getString("land_elevation")%></td>
-                <td><%=rs.getString("diameter")%></td>
-                <td><%=rs.getString("casingID")%></td>
-                <td><%=rs.getString("pump_description")%></td>
-                <td><%=rs.getString("state")%></td>
-                <td><%=rs.getString("county")%></td>
-                <td><%=rs.getString("latitude")%></td>
-                <td><%=rs.getString("longitude")%></td>
-            </tr>
-            <%
+                        //remove hanging comma
+                        if(idUsed.endsWith(", ")) {
+                            idUsed = idUsed.substring(0, idUsed.length()-2);
+                        }
+                        throw new Exception("No data " + idUsed);
+                    }
+                    rs.close();
+                    pstmt.close();
+                    conn.close();
+                }
+                catch(Exception e)
+                {
+                %>
+        <script>
+            document.getElementById('wellTable').style.display='none';
+            document.getElementById('alertDiv').style.display='block';
+            var node = document.createElement("A");
+            var x = document.createTextNode("<%=e.getMessage()%>");
+            node.appendChild(x);
+            document.getElementById('alertDiv').appendChild(node);
+        </script>
+                <%
                 }
             %>
         </table>
-        <%
-                rs.close();
-                stmt.close();
-                conn.close();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-                out.println("<h1> error: "+ e.getMessage()+"</h1>");
-            }
-        %>
     </div>
 </body>
 </html>

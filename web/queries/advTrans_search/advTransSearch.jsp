@@ -31,7 +31,7 @@
 
     <!-- Search options -->
     <div id="searchPages">
-        <h2>Search</h2>
+        <h2>Select the search you would like to do</h2>
         <input id="wellchk" type="button" name="tables" value="well" onclick="goto('../well_search/well_search.jsp')">
         <input id="transchk" type="button" name="tables" value="transducer"
                onclick="goto('../trans_search/trans_search.jsp')">
@@ -225,11 +225,10 @@
 
     </table>
     <%
-    } else {
-    %>
-    No water data is available for transducer <%=id%>.
-    <%
-        }
+    }
+    else {
+        throw new Exception("No data for " + id);
+    }
 
         rs.close();
         pstmt.close();
@@ -553,10 +552,8 @@
     <br>
     <%
     } else {
-    %>
-    No transducer data during this date range.
-    <%
-                }
+        throw new Exception("Could not determine the correlation");
+    }
 
                 // Close the statements
                 p2.close();
@@ -575,8 +572,12 @@
             conn.close();
         }
         catch (Exception e) {
-            e.printStackTrace();
-            //out.println("<h1> error: "+ e.getMessage()+"</h1>");
+    %>
+            <div class="alert">
+                <span class="clsX" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Error: </strong><%=e.getMessage()%>
+            </div>
+    <%
         }
 
     %>

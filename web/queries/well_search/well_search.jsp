@@ -37,19 +37,19 @@
                 <table class="table">
                     <tr>
                         <td>Unique WellID</td>
-                        <td><input id="id" class="wellKeys" type="text" placeholder="id"></td>
+                        <td><input name="wellId" class="wellKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
                         <td>Aquifer Code</td>
-                        <td><input id="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td><input name="aqua_Code" class="wellKeys" type="text" placeholder="code"></td>
                     </tr>
                     <tr>
                         <td>Type Code</td>
-                        <td><input id="type_Code" class="wellKeys" type="text" placeholder="code"></td>
+                        <td><input name="type_Code" class="wellKeys" type="text" placeholder="code"></td>
                     </tr>
                     <tr>
                         <td>Owner</td>
-                        <td><input id="owner" class="wellKeys" type="text" placeholder="name"></td>
+                        <td><input name="owner" class="wellKeys" type="text" placeholder="name"></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit"></td>

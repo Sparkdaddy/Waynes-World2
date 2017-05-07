@@ -285,7 +285,7 @@ public class UploadServlet extends HttpServlet {
                         } else {
                             String sql = "";
                             //Well input is present
-                            if (wellID != -1 && (!state.equals("")) && type_code.length() == 1) {
+                            if (wellID != -1 && (!state.isEmpty()) && type_code.length() == 1) {
                                 //check for valid data!
                                 sql = "INSERT INTO ritSpaGee.Well (wellID, usagee, aquafier_code, comment, type_code, top_depth, " +
                                         "bottom_depth, depth, bottom_elevation, water_level_elevation, land_elevation, diameter, " +
@@ -295,8 +295,8 @@ public class UploadServlet extends HttpServlet {
                                         land_elevation + ',' + diameter + ',' + casingID + ',' + "\"" + pump_description + "\"" + ',' + "\"" + state +
                                         "\"" + ',' + "\"" + county + "\"" + ',' + latitude + ',' + longitude + ");";
                                 if ((usage.equals("irrigation") || usage.equals("unused") || usage.equals("domestic") || usage.equals("stock")) && ((diameter >= 0) || (diameter == -1))
-                                        && (depth != -1) && (!aquafier_code.equals("")) && (land_elevation >= bottom_elevation) && (!state.equals("")) &&
-                                        (!county.equals("")) && (!type_code.equals("")) && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
+                                        && (depth != -1) && (!aquafier_code.isEmpty()) && (land_elevation >= bottom_elevation) && (!state.isEmpty()) &&
+                                        (!county.isEmpty()) && (!type_code.isEmpty()) && (90 >= latitude) && (latitude >= -90) && (longitude >= -180)
                                         && (180 >= longitude) && type_code.length() == 1) {
 
                                     System.out.println(sql);
@@ -439,13 +439,13 @@ public class UploadServlet extends HttpServlet {
                         Integer testYear = Integer.parseInt(date.substring(0,4));
 
                         String sql = "";
-                        if (!transID.equals("")) {
+                        if (!transID.isEmpty()) {
                             //check for valid data!
                             sql = "INSERT INTO ritSpaGee.Water (transID, timedate, salinity, temperature, conductivity," +
                                     "pressure, TDS) VALUES (" + "\"" + transID + "\"" + ',' + "\"" + date + "\"" +
                                     ',' + salinity + ',' + temperature + ',' + conductivity + ',' + pressure + ',' +
                                     TDS + ");";
-                            if ((!date.equals("")) && (!hourTime.equals("")) && temperature != 99999 &&
+                            if ((!date.isEmpty()) && (!hourTime.isEmpty()) && temperature != 99999 &&
                                     conductivity != 99999 && pressure != 99999 && salinity != 99999 && TDS != 99999 &&
                                     (testYear >= 1900) && testYear <= 2020 ) {
 

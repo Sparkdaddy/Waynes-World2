@@ -37,19 +37,19 @@
                 <table class="table">
                     <tr>
                         <td>Latitude (min)</td>
-                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
+                        <td><input name="latMin" class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
                         <td>Latitude (max)</td>
-                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
+                        <td><input name="latMax" class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
                         <td>Longitude (min)</td>
-                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
+                        <td><input name="longMin" class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
                         <td>Longitude (max)</td>
-                        <td><input class="locKeys" type="text" placeholder="0.0"></td>
+                        <td><input name="longMax" class="locKeys" type="text" placeholder="0.0"></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit"></td>
