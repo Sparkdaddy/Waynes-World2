@@ -16,7 +16,9 @@ fronting fairly hard and wants to learn all of this shit.
 1. figure out what to do
 2. implement what ever you figured out
 3. queries (well, location and transducers)
+4. change error exceptions to pop-up
+5. downloadable .csv
 
 
 # Middle fingers so far
-count = 8
+count = 9
