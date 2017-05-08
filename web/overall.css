@@ -21,11 +21,11 @@
 .clsX:hover {
     color: black;
 }
-ul.locList {
+ul.list {
     list-style-type: none;
     overflow: auto;
 }
-.locList li {
+.list li {
     margin-left: 20px;
     float: left;
 }

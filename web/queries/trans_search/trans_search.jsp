@@ -37,23 +37,23 @@
                 <table class="table">
                     <tr>
                         <td>Sensor ID</td>
-                        <td><input class="transKeys" type="text" placeholder="id"></td>
+                        <td><input name="sensID" class="transKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
                         <td>Well ID</td>
-                        <td><input class="transKeys" type="text" placeholder="id"></td>
+                        <td><input name="wellID" class="transKeys" type="text" placeholder="id"></td>
                     </tr>
                     <tr>
                         <td>Time (begin)</td>
-                        <td><input class="transKeys" type="text" placeholder="hh:mm:ss"></td>
+                        <td><input name="tStart" class="transKeys" type="text" placeholder="yyyy-mm-dd hh:mm:ss"></td>
                     </tr>
                     <tr>
                         <td>Time (end)</td>
-                        <td><input class="transKeys" type="text" placeholder="hh:mm:ss"></td>
+                        <td><input name="tEnd" class="transKeys" type="text" placeholder="yyyy-mm-dd hh:mm:ss"></td>
                     </tr>
                     <tr>
                         <td>Would you like rainfall information:</td>
-                        <td><input class="transKeys" type="radio"></td>
+                        <td><input name="rain" class="transKeys" type="checkbox"></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit"></td>

@@ -114,7 +114,7 @@
         ResultSet rs = stmt.executeQuery(sqlStmt);
 
     %>
-        <ul class="locList">
+        <ul class="list">
             <li><div id="locTable" class="tables">
                 <h4 class="text-center"> Location Table</h4>
                 <table class="table" border="1">
