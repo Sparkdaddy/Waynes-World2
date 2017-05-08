@@ -21,8 +21,13 @@
 .clsX:hover {
     color: black;
 }
-.locTable ul {
+ul.locList {
     list-style-type: none;
+    overflow: auto;
+}
+.locList li {
+    margin-left: 20px;
+    float: left;
 }
 ul.inlineList {
      list-style-type: none;

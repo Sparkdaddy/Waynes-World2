@@ -95,11 +95,10 @@
                     if(reqired < 1) {
                         throw new Exception("at least one parameter must be entered");
                     }
-                System.out.println(sqlStmt);
             %>
                 </tr>
             <%
-                    System.out.println(sqlStmt);
+
                     //retieving
                     String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
                     String USER = "ritSpaGee";
@@ -116,7 +115,7 @@
                     pstmt = conn.prepareStatement(sqlStmt);
                     ResultSet rs = pstmt.executeQuery();
 
-                    String wellID = "";
+                    String wellID;
                     if(rs.isBeforeFirst()) {
                         while(rs.next())
                         {

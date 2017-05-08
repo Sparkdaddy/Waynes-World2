@@ -34,9 +34,69 @@
         <span class="clsX" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Error: </strong>
     </div>
+    <div id="topTable" class="tables">
     <%
     try
     {
+        //gathering parameters from user
+        String sqlStmt,slatMin,slatMax,slongMin,slongMax;
+        int required = 0,latMin,latMax,longMin,longMax;
+
+        sqlStmt = "SELECT * FROM ritSpaGee.Well WHERE ";
+        slatMin = request.getParameter("latMin");
+        slatMax = request.getParameter("latMax");
+        slongMin = request.getParameter("longMin");
+        slongMax = request.getParameter("longMax");
+
+        if(!slatMin.isEmpty()) {
+            latMin = Integer.parseInt(slatMin);
+            if(latMin >= -90 && latMin <= 90) {
+                sqlStmt += "latitude > " + latMin + " AND ";
+                required++;
+            }
+            else {
+                throw new Exception("parameter not with in bounds of latitude");
+            }
+        }
+        if(!slatMax.isEmpty()) {
+            latMax = Integer.parseInt(slatMax);
+            if(latMax >= -90 && latMax <= 90){
+                sqlStmt += "latitude < " + latMax + " AND ";
+                required++;
+            }
+            else {
+                throw new Exception("parameter not with in bounds of latitude");
+            }
+        }
+        if(!slongMin.isEmpty()) {
+            longMin = Integer.parseInt("slongMin");
+            if(longMin >= -180 && longMin <= 180) {
+                sqlStmt += "longitude > " + longMin + " AND ";
+                required++;
+            }
+            else {
+                throw new Exception("parameter not with in bounds of longitude");
+            }
+        }
+        if(!slongMax.isEmpty()) {
+            longMax = Integer.parseInt("slongMax");
+            if(longMax >= -180 && longMax <= 180) {
+                sqlStmt += "longitude < " + longMax;
+                required++;
+            }
+            else {
+                throw new Exception("parameter not with in bounds of longitude");
+            }
+        }
+        if(sqlStmt.endsWith("AND ")) {
+            sqlStmt = sqlStmt.substring(0,sqlStmt.length()-5);
+        }
+        if (required < 1){
+            throw new Exception("at least one parameter must be entered");
+        }
+        System.out.println(sqlStmt);
+
+        //connect to database
         String DB_URL = "jdbc:mysql://mama.c95cjqkvfcem.us-east-1.rds.amazonaws.com:3306";
         String USER = "ritSpaGee";
         String PASS = "geeterman";
@@ -50,13 +110,10 @@
         //STEP 4: Execute a query
         System.out.println("Creating statement...");
         stmt = conn.createStatement();
-        String sql;
 
-        sql = "SELECT * from ritSpaGee.Well";
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery(sqlStmt);
 
     %>
-    <div class="locTable">
         <ul class="locList">
             <li><div id="locTable" class="tables">
                 <h4 class="text-center"> Location Table</h4>
@@ -65,6 +122,7 @@
                         <td>wellID</td>
                     </tr>
         <%
+
             if(rs.isBeforeFirst()) {
                 while(rs.next())
                 {
@@ -82,11 +140,11 @@
         %>
                 </table>
             </div></li>
-
             <li><div id="wellTable" class="tables">
                 <h4 class="text-center"> Well Table</h4>
+
                 <%
-                    rs = stmt.executeQuery(sql);
+                    rs = stmt.executeQuery(sqlStmt);
 
                     if(rs.isBeforeFirst()) {
                         while(rs.next())
@@ -112,9 +170,8 @@
                         <td>state</td>
                         <td>county</td>
                     </tr>
-
                     <tr>
-                        <td><%=rs.getString("wellID")%></td>
+                        <td><%=wellID%></td>
                         <td><%=rs.getString("usagee")%></td>
                         <td><%=rs.getString("aquafier_code")%></td>
                         <td><%=rs.getString("type_code")%></td>
@@ -131,6 +188,7 @@
                         <td><%=rs.getString("state")%></td>
                         <td><%=rs.getString("county")%></td>
                     </tr>
+                </table>
         <%
                 }
             }
@@ -138,10 +196,9 @@
                 throw new Exception("No data");
             }
         %>
-                </table>
             </div></li>
         </ul>
-    </div>
+
     <%
         rs.close();
         stmt.close();
@@ -151,7 +208,7 @@
     {
     %>
     <script>
-        document.getElementById('locTable').style.display='none';
+        document.getElementById('topTable').style.display='none';
         document.getElementById('alertDiv').style.display='block';
         var node = document.createElement("A");
         var x = document.createTextNode("<%=e.getMessage()%>");
@@ -161,7 +218,7 @@
     <%
         }
     %>
-
+    </div>
 </body>
 </html>
 
@@ -178,40 +235,3 @@
         }
     }
 </script>
-<%--<div id="<%=wellID%>" style="display: none">--%>
-    <%--<tr>--%>
-        <%--<td>usage</td>--%>
-        <%--<td>aquafier_code</td>--%>
-        <%--<td>type_code</td>--%>
-        <%--<td>comment</td>--%>
-        <%--<td>top_depth</td>--%>
-        <%--<td>bottom_depth</td>--%>
-        <%--<td>depth</td>--%>
-        <%--<td>bottom_elevation</td>--%>
-        <%--<td>water_level</td>--%>
-        <%--<td>land_elevation</td>--%>
-        <%--<td>diameter</td>--%>
-        <%--<td>casing</td>--%>
-        <%--<td>pump_description</td>--%>
-        <%--<td>state</td>--%>
-        <%--<td>county</td>--%>
-
-    <%--</tr>--%>
-    <%--<tr>--%>
-        <%--<td><%=rs.getString("usagee")%></td>--%>
-        <%--<td><%=rs.getString("aquafier_code")%></td>--%>
-        <%--<td><%=rs.getString("type_code")%></td>--%>
-        <%--<td><%=rs.getString("comment")%></td>--%>
-        <%--<td><%=rs.getString("top_depth")%></td>--%>
-        <%--<td><%=rs.getString("bottom_depth")%></td>--%>
-        <%--<td><%=rs.getString("depth")%></td>--%>
-        <%--<td><%=rs.getString("bottom_elevation")%></td>--%>
-        <%--<td><%=rs.getString("water_level_elevation")%></td>--%>
-        <%--<td><%=rs.getString("land_elevation")%></td>--%>
-        <%--<td><%=rs.getString("diameter")%></td>--%>
-        <%--<td><%=rs.getString("casingID")%></td>--%>
-        <%--<td><%=rs.getString("pump_description")%></td>--%>
-        <%--<td><%=rs.getString("state")%></td>--%>
-        <%--<td><%=rs.getString("county")%></td>--%>
-    <%--</tr>--%>
-<%--</div>--%>
