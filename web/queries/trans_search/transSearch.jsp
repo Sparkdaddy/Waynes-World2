@@ -9,6 +9,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="javax.swing.text.StyledEditorKit" %>
 <html>
 <head>
     <div id="nav_bar">
@@ -41,23 +42,25 @@
             try
             {
                 //gathering parameters from user
-                String sqlStmt,sqlStmt2,sensID,wellID,tStart,tEnd;
+                String sqlStmt,sqlStmt2,sensID,wID,tStart,tEnd,rain;
 
 
                 sqlStmt = "SELECT * FROM ritSpaGee.Well w, ritSpaGee.Transducer t WHERE w.wellID = t.wellID AND ";
                 sqlStmt2 = "SELECT * FROM ritSpaGee.Water w, ritSpaGee.Transducer t WHERE t.transID = w.transID AND ";
                 int required = 0;
+
                 sensID = request.getParameter("sensID");
-                wellID = request.getParameter("wellID");
+                wID = request.getParameter("wellID");
                 tStart = request.getParameter("tStart");
                 tEnd = request.getParameter("tEnd");
+                rain = request.getParameter("rain");
 
                 if(!sensID.isEmpty()) {
                     sqlStmt += "t.transID = \"" + sensID + "\" AND ";
                     required++;
                 }
-                if(!wellID.isEmpty()) {
-                    sqlStmt += "w.wellID = " + wellID;
+                if(!wID.isEmpty()) {
+                    sqlStmt += "w.wellID = " + wID;
                     required++;
                 }
                 if(!tStart.isEmpty() ) {
@@ -96,6 +99,7 @@
                 String PASS = "geeterman";
                 Connection conn = null;
                 Statement stmt = null;
+                Statement stmt2 = null;
                 //STEP 2: Register JDBC driver
                 Class.forName("com.mysql.jdbc.Driver");
                 //STEP 3: Open a connection
@@ -104,6 +108,7 @@
                 //STEP 4: Execute a query
                 System.out.println("Creating statement...");
                 stmt = conn.createStatement();
+                stmt2 = conn.createStatement();
 
                 ResultSet rs = stmt.executeQuery(sqlStmt);
 
@@ -165,7 +170,7 @@
                 %>
                 <script>
                     function download_csv() {
-                        var data = null;
+                        var data;
                         data = new Array(<%=result%>);
                         var csv = 'Time,Salinity,Temperature,Conductivity,Pressure,TDS\n';
                         csv += data;
@@ -191,9 +196,16 @@
                         <td>conductivity</td>
                         <td>pressure</td>
                         <td>TDS</td>
-
+                        <td>latitude</td>
+                        <td>longitude</td>
+                        <td>actual_amount</td>
+                        <td>normal_amount</td>
                     </tr>
                 <%
+                    String sqlStmtRain = "SELECT r.latitude,r.longitude,r.actual_amount,r.normal_amount " +
+                            "FROM ritSpaGee.Well w,ritSpaGee.Rainfall r " +
+                            "WHERE w.wellID =\"" + wID + "\" AND w.latitude = r.latitude AND w.longitude = r.longitude";
+                    ResultSet rsRain = stmt2.executeQuery(sqlStmtRain);
                     rs = stmt.executeQuery(sqlStmt2);
                     if(rs.isBeforeFirst()) {
                         while(rs.next())
@@ -206,8 +218,23 @@
                         <td><%=rs.getString("conductivity")%></td>
                         <td><%=rs.getString("pressure")%></td>
                         <td><%=rs.getString("TDS")%></td>
-                    </tr>
+                <%
+                            if(rsRain.next()) {
+                                if(!rain.isEmpty()) {
+                                %>
 
+                        <td><%=rsRain.getString("r.latitude")%></td>
+                        <td><%=rsRain.getString("r.longitude")%></td>
+                        <td><%=rsRain.getString("r.actual_amount")%></td>
+                        <td><%=rsRain.getString("r.normal_amount")%></td>
+                        <%
+                                }
+                            }
+                            else {
+                                System.out.println("No rainfall data");
+                            }
+                %>
+                    </tr>
                 <%
                         }
                     }
