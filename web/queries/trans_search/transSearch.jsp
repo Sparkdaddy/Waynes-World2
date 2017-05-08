@@ -186,7 +186,7 @@
                     }
                 </script>
 
-                <h4 class="text-center">Time Table</h4>
+                <h4 class="text-center">Time/Rain Table</h4>
                 <button onclick="download_csv()">Download CSV</button>
                 <table class="table" border="1">
                     <tr>
@@ -198,8 +198,8 @@
                         <td>TDS</td>
                         <td>latitude</td>
                         <td>longitude</td>
-                        <td>actual_amount</td>
-                        <td>normal_amount</td>
+                        <td>actual Rain amount</td>
+                        <td>normal Rain amount</td>
                     </tr>
                 <%
                     String sqlStmtRain = "SELECT r.latitude,r.longitude,r.actual_amount,r.normal_amount " +
