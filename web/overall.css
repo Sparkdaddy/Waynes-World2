@@ -21,36 +21,28 @@
 .clsX:hover {
     color: black;
 }
-.inlineList li {
-     display: inline-flex;
-     margin-left: 20px;
- }
-.locList li{
-    margin: 20px;
-    padding: 0;
-}
 .locTable ul {
-
     list-style-type: none;
 }
-header ul {
+ul.inlineList {
      list-style-type: none;
      margin: 0;
      padding: 0;
      overflow: auto;
      background-color: #333;
  }
-header li {
+.inlineList li {
+    display: inline-flex;
+    margin-left: 20px;
     float: left;
-
 }
-header li a {
+.inlineList li a {
     display: inline-block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
-header li a:hover {
+.inlineList li a:hover {
     background-color: #111;
 }
