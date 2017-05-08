@@ -46,7 +46,7 @@
 
 
                 sqlStmt = "SELECT * FROM ritSpaGee.Well w, ritSpaGee.Transducer t WHERE w.wellID = t.wellID AND ";
-                sqlStmt2 = "SELECT * FROM ritSpaGee.Water w, ritSpaGee.Transducer t WHERE t.transID = w.transID AND ";
+                sqlStmt2 = "SELECT * FROM ritSpaGee.Water w, ritSpaGee.Transducer t WHERE t.transID = w.transID";
                 int required = 0;
 
                 sensID = request.getParameter("sensID");
@@ -65,7 +65,7 @@
                 }
                 if(!tStart.isEmpty() ) {
                     if(!sensID.isEmpty()) {
-                        sqlStmt2 += "t.transID = \"" + sensID + "\" AND w.timedate >= \"" + tStart + "\" AND ";
+                        sqlStmt2 += " AND t.transID = \"" + sensID + "\" AND w.timedate >= \"" + tStart + "\" AND ";
                         required++;
                     }
                     else {
@@ -147,6 +147,7 @@
                     rs = stmt.executeQuery(sqlStmt2);
                     if(rs.isBeforeFirst()) {
                         while(rs.next()) {
+                            csvList.add(rs.getString("wellID"));
                             csvList.add(rs.getString("timedate"));
                             csvList.add(rs.getString("salinity"));
                             csvList.add(rs.getString("temperature"));
@@ -190,6 +191,7 @@
                 <button onclick="download_csv()">Download CSV</button>
                 <table class="table" border="1">
                     <tr>
+                        <td>wellID</td>
                         <td>time</td>
                         <td>salinity</td>
                         <td>temperature</td>
@@ -212,6 +214,7 @@
                         {
                 %>
                     <tr>
+                        <td><%=rs.getString("wellID")%></td>
                         <td><%=rs.getString("timedate")%></td>
                         <td><%=rs.getString("salinity")%></td>
                         <td><%=rs.getString("temperature")%></td>
