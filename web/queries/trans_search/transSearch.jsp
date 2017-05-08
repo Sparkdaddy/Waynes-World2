@@ -166,14 +166,13 @@
                 <script>
                     function download_csv() {
                         var data = null;
-                        data = <%=result%>;
-                        var csv = 'Name,Title\n';
-                        data.forEach(function(row) {
-                            csv += row.join;
-                            csv += "\n";
-                        });
+                        data = new Array(<%=result%>);
+                        var csv = 'Time,Salinity,Temperature,Conductivity,Pressure,TDS\n';
+                        csv += data;
+                        csv += "\n";
 
                         console.log(data);
+                        console.log(csv);
                         var action = document.createElement('a');
                         action.href = 'data:text/csv:charset=utf-8,' + encodeURI(csv);
                         action.target = '_blank';
