@@ -69,7 +69,7 @@
             }
         }
         if(!slongMin.isEmpty()) {
-            longMin = Integer.parseInt("slongMin");
+            longMin = Integer.parseInt(slongMin);
             if(longMin >= -180 && longMin <= 180) {
                 sqlStmt += "longitude > " + longMin + " AND ";
                 required++;
@@ -79,7 +79,7 @@
             }
         }
         if(!slongMax.isEmpty()) {
-            longMax = Integer.parseInt("slongMax");
+            longMax = Integer.parseInt(slongMax);
             if(longMax >= -180 && longMax <= 180) {
                 sqlStmt += "longitude < " + longMax;
                 required++;
