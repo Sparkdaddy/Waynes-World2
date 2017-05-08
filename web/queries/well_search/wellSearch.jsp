@@ -81,6 +81,9 @@
                     <td>owner</td>
             <%
                     }
+                    else if (!id.isEmpty() && owner.isEmpty()) {
+                        sqlStmt = "SELECT * FROM ritSpaGee.Well WHERE wellID=" + id + " and ";
+                    }
                     if(!aquCode.isEmpty()) {
                         sqlStmt += "w.aquafier_code=\"" + aquCode + "\" and ";
                         reqired++;
@@ -95,6 +98,7 @@
                     if(reqired < 1) {
                         throw new Exception("at least one parameter must be entered");
                     }
+                System.out.println(sqlStmt);
             %>
                 </tr>
             <%
